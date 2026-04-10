@@ -688,30 +688,236 @@ footer{
 }
 .footer-legal-link:hover{color:var(--gold-light);}
 
+/* ── HAMBURGER MENU ── */
+.hamburger{
+  display:none;flex-direction:column;gap:5px;
+  cursor:pointer;padding:8px;border:none;background:none;z-index:110;
+}
+.hamburger span{
+  display:block;width:24px;height:2px;
+  background:rgba(255,255,255,.80);border-radius:2px;
+  transition:transform .3s,opacity .3s;
+}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.mobile-menu{
+  display:none;
+  position:fixed;inset:0;z-index:105;
+  background:rgba(2,14,31,.97);
+  backdrop-filter:blur(28px);
+  flex-direction:column;align-items:center;justify-content:center;
+  gap:36px;
+}
+.mobile-menu.open{display:flex;}
+.mobile-menu-item{
+  font-family:'Cormorant Garamond',serif;
+  font-size:36px;font-weight:600;letter-spacing:.06em;
+  color:rgba(255,255,255,.82);cursor:pointer;
+  transition:color .25s;
+}
+.mobile-menu-item:hover{color:var(--gold-light);}
+.mobile-menu-cta{
+  margin-top:12px;padding:16px 40px;border-radius:999px;
+  background:linear-gradient(135deg,#4da0d8,#2068a0);
+  color:#fff;font-size:16px;font-weight:600;cursor:pointer;border:none;
+  letter-spacing:.06em;
+}
+
+/* ── CONTACT SECTION ── */
+.contact-section{
+  padding:130px 76px;
+  position:relative;z-index:1;
+}
+.contact-grid{
+  max-width:1240px;margin:64px auto 0;
+  display:grid;grid-template-columns:1fr 1.4fr;
+  gap:60px;align-items:start;
+}
+.contact-info-wrap{}
+.contact-info-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:42px;font-weight:600;line-height:1.1;
+  margin-bottom:18px;
+}
+.contact-info-desc{
+  font-size:16px;line-height:1.82;color:var(--w60);
+  margin-bottom:36px;max-width:380px;
+}
+.contact-detail{
+  display:flex;align-items:flex-start;gap:16px;
+  padding:18px 0;
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.contact-detail:last-child{border-bottom:none;}
+.contact-detail-icon{
+  width:42px;height:42px;border-radius:12px;flex-shrink:0;
+  background:rgba(61,143,200,.12);
+  border:1px solid rgba(61,143,200,.22);
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;
+}
+.contact-detail-label{
+  font-size:10px;letter-spacing:.38em;color:var(--gold);
+  text-transform:uppercase;margin-bottom:4px;
+}
+.contact-detail-val{
+  font-size:15px;color:var(--w84);line-height:1.6;
+}
+
+/* Contact Form */
+.contact-form-wrap{
+  background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.025));
+  border:1px solid rgba(61,143,200,.20);
+  border-radius:32px;
+  padding:44px 40px;
+  backdrop-filter:blur(18px);
+  position:relative;overflow:hidden;
+}
+.contact-form-wrap::before{
+  content:'';position:absolute;top:-60px;right:-60px;
+  width:200px;height:200px;border-radius:50%;
+  background:radial-gradient(circle,rgba(61,143,200,.18),transparent 70%);
+  pointer-events:none;
+}
+.contact-form-wrap::after{
+  content:'';position:absolute;bottom:-40px;left:-40px;
+  width:160px;height:160px;border-radius:50%;
+  background:radial-gradient(circle,rgba(201,165,90,.12),transparent 70%);
+  pointer-events:none;
+}
+.form-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:30px;font-weight:600;margin-bottom:6px;
+}
+.form-sub{font-size:13.5px;color:var(--w60);margin-bottom:30px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
+.form-group{display:flex;flex-direction:column;gap:7px;margin-bottom:16px;}
+.form-label{
+  font-size:11px;letter-spacing:.30em;color:var(--gold);
+  text-transform:uppercase;font-weight:500;
+}
+.form-input,.form-select,.form-textarea{
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:14px;
+  padding:14px 18px;
+  color:#fff;font-size:15px;
+  font-family:'DM Sans',Arial,sans-serif;
+  width:100%;
+  outline:none;
+  transition:border-color .3s,background .3s,box-shadow .3s;
+  -webkit-appearance:none;
+}
+.form-select option{background:#041527;color:#fff;}
+.form-input:focus,.form-select:focus,.form-textarea:focus{
+  border-color:rgba(61,143,200,.50);
+  background:rgba(61,143,200,.08);
+  box-shadow:0 0 0 3px rgba(61,143,200,.12);
+}
+.form-input::placeholder,.form-textarea::placeholder{color:rgba(255,255,255,.28);}
+.form-textarea{resize:vertical;min-height:110px;line-height:1.6;}
+.form-submit{
+  width:100%;padding:17px;border-radius:14px;border:none;
+  background:linear-gradient(135deg,#4da0d8,#2068a0);
+  color:#fff;font-size:16px;font-weight:600;cursor:pointer;
+  letter-spacing:.06em;
+  box-shadow:0 12px 36px rgba(61,143,200,.30);
+  transition:transform .3s,box-shadow .3s,opacity .3s;
+  position:relative;overflow:hidden;
+  margin-top:6px;
+  font-family:'DM Sans',Arial,sans-serif;
+}
+.form-submit:hover:not(:disabled){
+  transform:translateY(-2px);
+  box-shadow:0 18px 48px rgba(61,143,200,.40);
+}
+.form-submit:disabled{opacity:.65;cursor:not-allowed;}
+.form-submit .btn-text{display:inline-block;transition:opacity .25s;}
+.form-submit .btn-spinner{
+  display:none;
+  width:20px;height:20px;border-radius:50%;
+  border:2px solid rgba(255,255,255,.3);
+  border-top-color:#fff;
+  animation:spin .7s linear infinite;
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+}
+@keyframes spin{to{transform:translate(-50%,-50%) rotate(360deg);}}
+.form-submit.loading .btn-text{opacity:0;}
+.form-submit.loading .btn-spinner{display:block;}
+
+/* Success / Error */
+.form-toast{
+  display:none;align-items:center;gap:14px;
+  padding:16px 20px;border-radius:14px;
+  margin-top:16px;font-size:14px;line-height:1.5;
+}
+.form-toast.success{
+  background:rgba(34,197,94,.12);
+  border:1px solid rgba(34,197,94,.28);
+  color:rgba(134,239,172,1);
+}
+.form-toast.error{
+  background:rgba(239,68,68,.10);
+  border:1px solid rgba(239,68,68,.28);
+  color:rgba(252,165,165,1);
+}
+.form-toast.show{display:flex;}
+.toast-icon{font-size:22px;flex-shrink:0;}
+
 /* ── RESPONSIVE ── */
 @media(max-width:1200px){
   .products-grid{grid-template-columns:repeat(2,1fr) !important;}
   .elements-wrap{grid-template-columns:repeat(3,1fr) !important;}
   .footer-main{grid-template-columns:1fr 1fr !important;gap:36px;}
+  .contact-grid{grid-template-columns:1fr !important;}
+  .contact-form-wrap{order:-1;}
 }
 @media(max-width:1080px){
   .hero-grid,.tech-split,.vision-split{grid-template-columns:1fr !important;}
   .origin-steps{grid-template-columns:1fr !important;}
-  nav.menu{display:none;}
+  nav.menu,.nav-cta{display:none !important;}
+  .hamburger{display:flex;}
   .hero-title{font-size:72px !important;}
-  .section,.section-alt,.hero-section{padding-left:28px !important;padding-right:28px !important;}
+  .section,.section-alt,.hero-section,.contact-section{padding-left:28px !important;padding-right:28px !important;}
   .stat-row{grid-template-columns:1fr 1fr !important;}
+  .lineup-tagline{font-size:36px !important;}
+  .lineup-btns{flex-direction:column;align-items:center;}
+  header{padding:14px 24px !important;}
 }
-@media(max-width:700px){
-  .hero-title{font-size:54px !important;line-height:.90 !important;}
-  header{padding:14px 20px !important;}
+@media(max-width:768px){
+  .hero-title{font-size:58px !important;line-height:.90 !important;}
+  .hero-right{min-height:350px !important;}
+  .hero-can-img{width:320px !important;}
+  .hero-ring-1{width:340px !important;height:340px !important;}
+  .hero-ring-2{width:260px !important;height:260px !important;}
+  .hero-glow{width:340px !important;height:340px !important;}
+  .form-row{grid-template-columns:1fr !important;}
+  .contact-form-wrap{padding:28px 22px !important;}
+  .sec-title{font-size:46px !important;}
+}
+@media(max-width:600px){
+  .hero-title{font-size:48px !important;}
+  header{padding:12px 18px !important;}
   .products-grid{grid-template-columns:1fr !important;}
   .elements-wrap{grid-template-columns:1fr 1fr !important;}
   .stat-row{grid-template-columns:1fr !important;}
-  .sec-title{font-size:44px !important;}
+  .sec-title{font-size:40px !important;}
   .footer-main{grid-template-columns:1fr !important;padding:40px 24px !important;}
   .footer-bottom{padding:20px 24px 28px !important;flex-direction:column;align-items:flex-start;}
   .footer-rule{margin-left:24px !important;margin-right:24px !important;}
+  .section,.section-alt,.hero-section,.contact-section{padding-top:80px !important;padding-bottom:80px !important;}
+  .nav-logo-img{width:56px !important;height:56px !important;}
+  .hero-can-img{width:260px !important;}
+  .hero-ring-1{width:280px !important;height:280px !important;}
+  .hero-ring-2{width:210px !important;height:210px !important;}
+  .origin-steps{grid-template-columns:1fr !important;}
+  .contact-grid{gap:36px !important;}
+  .form-row{grid-template-columns:1fr !important;}
+  .lineup-section .lineup-tagline{font-size:28px !important;}
+  .hero-btns{flex-direction:column;align-items:flex-start;}
+  .btn-primary,.btn-gold{width:100%;justify-content:center;}
+  .footer-legal{flex-wrap:wrap;gap:12px;}
 }
 </style>
 </head>
@@ -743,8 +949,22 @@ footer{
     <span class="menu-item">Global</span>
     <span class="menu-item">Contact</span>
   </nav>
-  <button class="nav-cta">Partner With Us</button>
+  <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Partner With Us</button>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </header>
+<!-- Mobile Menu Overlay -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="hamburger open" style="position:absolute;top:20px;right:22px;" onclick="closeMobile()">
+    <span></span><span></span><span></span>
+  </button>
+  <span class="mobile-menu-item" onclick="closeMobile('products')">Products</span>
+  <span class="mobile-menu-item" onclick="closeMobile('technology')">Technology</span>
+  <span class="mobile-menu-item" onclick="closeMobile('philosophy')">Philosophy</span>
+  <span class="mobile-menu-item" onclick="closeMobile('contact')">Contact</span>
+  <button class="mobile-menu-cta" onclick="closeMobile('contact')">Partner With Us</button>
+</div>
 
 <!-- ── HERO ── -->
 <section class="hero-section z1">
@@ -863,7 +1083,7 @@ footer{
 </section>
 
 <!-- ── TECHNOLOGY ── -->
-<section class="section-alt z1">
+<section class="section-alt z1" id="technology">
   <div class="tech-split">
     <div>
       <div class="kicker">Technology</div>
@@ -925,7 +1145,7 @@ footer{
 </section>
 
 <!-- ── PRODUCTS ── -->
-<section class="section z1">
+<section class="section z1" id="products">
   <div class="center-intro">
     <div class="kicker">Product Collection</div>
     <h2 class="sec-title">Signature 330ml Aluminium Cans</h2>
@@ -1001,7 +1221,7 @@ footer{
 </section>
 
 <!-- ── PHILOSOPHY ── -->
-<section class="section-alt z1">
+<section class="section-alt z1" id="philosophy">
   <div class="center-intro">
     <div class="kicker">Philosophy</div>
     <h2 class="sec-title">Rooted in Indian elemental thought</h2>
@@ -1038,6 +1258,118 @@ footer{
       <div class="v-item">
         <div class="v-no">03</div>
         <div class="v-text">Global design language rooted in Indian elemental soul and philosophy</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section class="contact-section z1" id="contact">
+  <div class="center-intro">
+    <div class="kicker">Get In Touch</div>
+    <h2 class="sec-title">Let's Build Something Together</h2>
+    <div class="gold-rule"></div>
+    <p class="sec-para">Whether you're a distributor, hospitality partner, investor, or simply curious — we'd love to hear from you.</p>
+  </div>
+
+  <div class="contact-grid">
+    <!-- Left: Info -->
+    <div class="contact-info-wrap">
+      <div class="contact-info-title">We're ready to<br>partner with you.</div>
+      <div class="contact-info-desc">Akash Jal is actively seeking distribution partnerships, hospitality integrations, and investor conversations across India and globally.</div>
+
+      <div class="contact-detail">
+        <div class="contact-detail-icon">📞</div>
+        <div>
+          <div class="contact-detail-label">Phone</div>
+          <div class="contact-detail-val">+91 99080 11939</div>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-detail-icon">✉️</div>
+        <div>
+          <div class="contact-detail-label">Email</div>
+          <div class="contact-detail-val">info@akashjal.com</div>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-detail-icon">🌐</div>
+        <div>
+          <div class="contact-detail-label">Website</div>
+          <div class="contact-detail-val">akashjal.com</div>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-detail-icon">📍</div>
+        <div>
+          <div class="contact-detail-label">Address</div>
+          <div class="contact-detail-val">Plot No. 134, I.D.A., Phase III<br>Cherlapally, TSIIC-IALA<br>Hyderabad – 500051</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Form -->
+    <div class="contact-form-wrap">
+      <div class="form-title">Send Us a Message</div>
+      <div class="form-sub">We typically respond within 24 hours.</div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">First Name *</label>
+          <input type="text" id="cf-fname" class="form-input" placeholder="Aryan" required/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Last Name *</label>
+          <input type="text" id="cf-lname" class="form-input" placeholder="Mohanty" required/>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Email Address *</label>
+          <input type="email" id="cf-email" class="form-input" placeholder="you@example.com" required/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Phone Number</label>
+          <input type="tel" id="cf-phone" class="form-input" placeholder="+91 98765 43210"/>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">I'm interested in *</label>
+        <select id="cf-interest" class="form-select" required>
+          <option value="" disabled selected>Select your interest…</option>
+          <option value="Distribution Partnership">Distribution Partnership</option>
+          <option value="Hospitality Sales">Hospitality Sales</option>
+          <option value="Investor Enquiry">Investor Enquiry</option>
+          <option value="Brand Collaboration">Brand Collaboration</option>
+          <option value="Retail Placement">Retail Placement</option>
+          <option value="General Enquiry">General Enquiry</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Company / Organisation</label>
+        <input type="text" id="cf-company" class="form-input" placeholder="Your company name (optional)"/>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Message *</label>
+        <textarea id="cf-message" class="form-textarea" placeholder="Tell us about your enquiry, your market, or how you'd like to partner…" required></textarea>
+      </div>
+
+      <button class="form-submit" id="contactSubmit" onclick="submitContactForm()">
+        <span class="btn-text">Send Message →</span>
+        <div class="btn-spinner"></div>
+      </button>
+
+      <div class="form-toast success" id="toastSuccess">
+        <span class="toast-icon">✅</span>
+        <span>Your message has been sent! We'll get back to you within 24 hours.</span>
+      </div>
+      <div class="form-toast error" id="toastError">
+        <span class="toast-icon">⚠️</span>
+        <span id="toastErrorMsg">Something went wrong. Please try again or email us directly at info@akashjal.com</span>
       </div>
     </div>
   </div>
@@ -1088,7 +1420,7 @@ footer{
       </div>
       <div class="footer-contact-item">
         <div class="footer-contact-label">Email</div>
-        <div class="footer-contact-val">info@akashjal.com</div>
+        <div class="footer-contact-val"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4a23242c250a2b212b3922202b2664292527">[email&#160;protected]</a></div>
         <div class="footer-contact-val">akashjal.com</div>
       </div>
       <div class="footer-contact-item">
@@ -1110,17 +1442,151 @@ footer{
   </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
-// Parallax hero
+// ── EmailJS init ──────────────────────────────────────
+// SETUP INSTRUCTIONS:
+// 1. Go to https://www.emailjs.com and create a free account
+// 2. Add an Email Service (Gmail recommended) → copy your SERVICE ID
+// 3. Create an Email Template using these variables:
+//    {{from_name}}, {{from_email}}, {{phone}}, {{interest}}, {{company}}, {{message}}, {{reply_to}}
+// 4. Copy your TEMPLATE ID and PUBLIC KEY
+// 5. Replace the three placeholder strings below:
+const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';   // e.g. 'service_abc123'
+const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';  // e.g. 'template_xyz456'
+const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';   // e.g. 'AbCdEfGhIjKlMnOp'
+
+(function(){
+  try { emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY }); } catch(e){}
+})();
+
+// ── Contact form submit ──────────────────────────────
+function submitContactForm() {
+  const fname    = document.getElementById('cf-fname').value.trim();
+  const lname    = document.getElementById('cf-lname').value.trim();
+  const email    = document.getElementById('cf-email').value.trim();
+  const phone    = document.getElementById('cf-phone').value.trim();
+  const interest = document.getElementById('cf-interest').value;
+  const company  = document.getElementById('cf-company').value.trim();
+  const message  = document.getElementById('cf-message').value.trim();
+
+  // Basic validation
+  if (!fname || !lname || !email || !interest || !message) {
+    showToast('error', 'Please fill in all required fields.');
+    return;
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    showToast('error', 'Please enter a valid email address.');
+    return;
+  }
+
+  const btn = document.getElementById('contactSubmit');
+  btn.disabled = true;
+  btn.classList.add('loading');
+  hideToasts();
+
+  const templateParams = {
+    from_name : `${fname} ${lname}`,
+    from_email: email,
+    reply_to  : email,
+    phone     : phone || 'Not provided',
+    interest  : interest,
+    company   : company || 'Not provided',
+    message   : message,
+    to_email  : 'info@akashjal.com'
+  };
+
+  // If EmailJS keys not yet set up, simulate a mailto fallback
+  if (EMAILJS_PUBLIC_KEY === 'YOUR_PUBLIC_KEY') {
+    // Fallback: open native mail client
+    const subject = encodeURIComponent(`Akash Jal Enquiry – ${interest}`);
+    const body = encodeURIComponent(
+      `Name: ${fname} ${lname}\nEmail: ${email}\nPhone: ${phone || 'N/A'}\nCompany: ${company || 'N/A'}\nInterest: ${interest}\n\nMessage:\n${message}`
+    );
+    window.location.href = `mailto:info@akashjal.com?subject=${subject}&body=${body}`;
+    btn.disabled = false;
+    btn.classList.remove('loading');
+    showToast('success');
+    clearForm();
+    return;
+  }
+
+  emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
+    .then(() => {
+      showToast('success');
+      clearForm();
+    })
+    .catch((err) => {
+      console.error('EmailJS error:', err);
+      showToast('error', 'Failed to send. Please email us directly at info@akashjal.com');
+    })
+    .finally(() => {
+      btn.disabled = false;
+      btn.classList.remove('loading');
+    });
+}
+
+function showToast(type, msg) {
+  hideToasts();
+  if (type === 'success') {
+    document.getElementById('toastSuccess').classList.add('show');
+  } else {
+    if (msg) document.getElementById('toastErrorMsg').textContent = msg;
+    document.getElementById('toastError').classList.add('show');
+  }
+}
+function hideToasts() {
+  document.getElementById('toastSuccess').classList.remove('show');
+  document.getElementById('toastError').classList.remove('show');
+}
+function clearForm() {
+  ['cf-fname','cf-lname','cf-email','cf-phone','cf-interest','cf-company','cf-message']
+    .forEach(id => { const el = document.getElementById(id); if(el) el.value = ''; });
+}
+
+// ── Hamburger / Mobile menu ──────────────────────────
+const hamburger  = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
+  document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+});
+function closeMobile(sectionId) {
+  hamburger.classList.remove('open');
+  mobileMenu.classList.remove('open');
+  document.body.style.overflow = '';
+  if (sectionId) {
+    setTimeout(() => {
+      const el = document.getElementById(sectionId);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }, 120);
+  }
+}
+
+// ── Nav smooth scroll ────────────────────────────────
+document.querySelectorAll('.menu-item').forEach((item, i) => {
+  const ids = ['','','products','technology','philosophy','contact'];
+  item.addEventListener('click', () => {
+    const el = document.getElementById(ids[i]);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+// Partner With Us nav cta → contact
+document.querySelector('.nav-cta') && document.querySelector('.nav-cta').addEventListener('click', () => {
+  document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+});
+
+// ── Parallax hero ────────────────────────────────────
 const heroLeft = document.getElementById('heroLeft');
 window.addEventListener('scroll', () => {
   const shift = Math.min(window.scrollY * 0.09, 60);
   heroLeft.style.transform = `translateY(${shift}px)`;
 }, { passive: true });
 
-// Scroll-reveal
+// ── Scroll-reveal ────────────────────────────────────
 const revealEls = document.querySelectorAll(
-  '.origin-card, .feat-item, .prod-card, .el-card, .stat-card, .v-item'
+  '.origin-card, .feat-item, .prod-card, .el-card, .stat-card, .v-item, .contact-detail, .contact-form-wrap, .contact-info-wrap'
 );
 const io = new IntersectionObserver((entries) => {
   entries.forEach((e, i) => {
@@ -1129,11 +1595,11 @@ const io = new IntersectionObserver((entries) => {
       io.unobserve(e.target);
     }
   });
-}, { threshold: 0.1 });
+}, { threshold: 0.08 });
 revealEls.forEach(el => { el.style.opacity = '0'; io.observe(el); });
 
-// Particles
-const bg = document.querySelector('.bg-wrap');
+// ── Particles ────────────────────────────────────────
+const bgWrap = document.querySelector('.bg-wrap');
 for (let i = 0; i < 22; i++) {
   const p = document.createElement('div');
   p.className = 'particle';
@@ -1145,7 +1611,7 @@ for (let i = 0; i < 22; i++) {
     width:${1 + Math.random()*2.5}px;
     height:${1 + Math.random()*2.5}px;
   `;
-  bg.appendChild(p);
+  bgWrap.appendChild(p);
 }
 </script>
 </body>
