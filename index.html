@@ -4,6 +4,25 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Akash Jal – Crafted from Air</title>
+<script>
+// ── NAVIGATION – defined early, safe from all other script errors ──
+function goTo(sectionId) {
+  // Use DOMContentLoaded guard in case DOM not ready yet
+  function doScroll() {
+    var el = document.getElementById(sectionId);
+    if (!el) return;
+    var headerEl = document.querySelector('header');
+    var headerH  = headerEl ? headerEl.offsetHeight : 70;
+    var top = el.getBoundingClientRect().top + window.pageYOffset - headerH - 10;
+    window.scrollTo({ top: top, behavior: 'smooth' });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', doScroll);
+  } else {
+    doScroll();
+  }
+}
+</script>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -1350,14 +1369,13 @@ footer{
     </div>
   </div>
   <nav class="menu">
-    <span class="menu-item">Story</span>
-    <span class="menu-item">Experience</span>
-    <span class="menu-item">Products</span>
-    <span class="menu-item">Technology</span>
-    <span class="menu-item">Global</span>
-    <span class="menu-item">Contact</span>
+    <span class="menu-item" onclick="goTo('story')">Story</span>
+    <span class="menu-item" onclick="goTo('experience')">Experience</span>
+    <span class="menu-item" onclick="goTo('products')">Products</span>
+    <span class="menu-item" onclick="goTo('technology')">Technology</span>
+    <span class="menu-item" onclick="goTo('global')">Global</span>
   </nav>
-  <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Partner With Us</button>
+  <button class="nav-cta" onclick="goTo('contact')">Partner With Us</button>
   <button class="hamburger" id="hamburger" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
@@ -1367,15 +1385,16 @@ footer{
   <button class="hamburger open" style="position:absolute;top:20px;right:22px;" onclick="closeMobile()">
     <span></span><span></span><span></span>
   </button>
+  <span class="mobile-menu-item" onclick="closeMobile('story')">Story</span>
+  <span class="mobile-menu-item" onclick="closeMobile('experience')">Experience</span>
   <span class="mobile-menu-item" onclick="closeMobile('products')">Products</span>
   <span class="mobile-menu-item" onclick="closeMobile('technology')">Technology</span>
-  <span class="mobile-menu-item" onclick="closeMobile('philosophy')">Philosophy</span>
-  <span class="mobile-menu-item" onclick="closeMobile('contact')">Contact</span>
+  <span class="mobile-menu-item" onclick="closeMobile('global')">Global</span>
   <button class="mobile-menu-cta" onclick="closeMobile('contact')">Partner With Us</button>
 </div>
 
 <!-- ── HERO ── -->
-<section class="hero-section z1">
+<section class="hero-section z1" id="story">
   <div class="hero-grid">
     <div class="hero-left" id="heroLeft">
       <div class="eyebrow-tag">
@@ -1447,7 +1466,7 @@ footer{
 </div>
 
 <!-- ── LINEUP BANNER ── -->
-<div class="lineup-section z1">
+<div class="lineup-section z1" id="experience">
   <!-- LINEUP IMAGE: replace src with your product lineup image path -->
   <img src="lineup.png" alt="Akash Jal product lineup" class="lineup-img"/>
   <div class="lineup-overlay">
@@ -1646,7 +1665,7 @@ footer{
 </section>
 
 <!-- ── VISION ── -->
-<section class="section z1">
+<section class="section z1" id="global">
   <div class="vision-split">
     <div>
       <div class="kicker">Global Vision</div>
@@ -1697,7 +1716,7 @@ footer{
         <div class="contact-detail-icon">✉️</div>
         <div>
           <div class="contact-detail-label">Email</div>
-          <div class="contact-detail-val"><a href="mailto:info@akashjal.com" style="color:inherit;text-decoration:none;">info@akashjal.com</a></div>
+          <div class="contact-detail-val"><a href="/cdn-cgi/l/email-protection#660f08000926070d07150e0c070a4805090b" style="color:inherit;text-decoration:none;"><span class="__cf_email__" data-cfemail="cea7a0a8a18eafa5afbda6a4afa2e0ada1a3">[email&#160;protected]</span></a></div>
         </div>
       </div>
       <div class="contact-detail">
@@ -1777,7 +1796,7 @@ footer{
       </div>
       <div class="form-toast error" id="toastError">
         <span class="toast-icon">⚠️</span>
-        <span id="toastErrorMsg">Something went wrong. Please try again or email us directly at info@akashjal.com</span>
+        <span id="toastErrorMsg">Something went wrong. Please try again or email us directly at <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cca5a2aaa38cada7adbfa4a6ada0e2afa3a1">[email&#160;protected]</a></span>
       </div>
     </div>
   </div>
@@ -1799,12 +1818,11 @@ footer{
     <div>
       <div class="footer-col-title">Navigate</div>
       <div class="footer-links">
-        <span class="footer-link">Story</span>
-        <span class="footer-link">Experience</span>
-        <span class="footer-link">Products</span>
-        <span class="footer-link">Technology</span>
-        <span class="footer-link">Global</span>
-        <span class="footer-link">Contact</span>
+        <span class="footer-link" onclick="goTo('story')">Story</span>
+        <span class="footer-link" onclick="goTo('experience')">Experience</span>
+        <span class="footer-link" onclick="goTo('products')">Products</span>
+        <span class="footer-link" onclick="goTo('technology')">Technology</span>
+        <span class="footer-link" onclick="goTo('global')">Global</span>
       </div>
     </div>
 
@@ -1812,11 +1830,11 @@ footer{
     <div>
       <div class="footer-col-title">Company</div>
       <div class="footer-links">
-        <span class="footer-link">Leadership</span>
-        <span class="footer-link">Contact Us</span>
-        <span class="footer-link">Partner With Us</span>
-        <span class="footer-link">Distributor Enquiry</span>
-        <span class="footer-link">Hospitality Sales</span>
+        <span class="footer-link" onclick="goTo('story')">Leadership</span>
+        <span class="footer-link" onclick="goTo('contact')">Contact Us</span>
+        <span class="footer-link" onclick="goTo('contact')">Partner With Us</span>
+        <span class="footer-link" onclick="goTo('contact')">Distributor Enquiry</span>
+        <span class="footer-link" onclick="goTo('contact')">Hospitality Sales</span>
       </div>
     </div>
 
@@ -1829,7 +1847,7 @@ footer{
       </div>
       <div class="footer-contact-item">
         <div class="footer-contact-label">Email</div>
-        <div class="footer-contact-val"><a href="mailto:info@akashjal.com" style="color:inherit;text-decoration:none;">info@akashjal.com</a></div>
+        <div class="footer-contact-val"><a href="/cdn-cgi/l/email-protection#c1a8afa7ae81a0aaa0b2a9aba0adefa2aeac" style="color:inherit;text-decoration:none;"><span class="__cf_email__" data-cfemail="4d24232b220d2c262c3e25272c21632e2220">[email&#160;protected]</span></a></div>
         <div class="footer-contact-val"><a href="https://www.akashjal.com" target="_blank" style="color:inherit;text-decoration:none;">www.akashjal.com</a></div>
       </div>
       <div class="footer-contact-item">
@@ -1851,7 +1869,7 @@ footer{
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
 // ── EmailJS init ──────────────────────────────────────
 // SETUP INSTRUCTIONS:
@@ -1972,19 +1990,6 @@ function closeMobile(sectionId) {
     }, 120);
   }
 }
-
-// ── Nav smooth scroll ────────────────────────────────
-document.querySelectorAll('.menu-item').forEach((item, i) => {
-  const ids = ['','','products','technology','philosophy','contact'];
-  item.addEventListener('click', () => {
-    const el = document.getElementById(ids[i]);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
-  });
-});
-// Partner With Us nav cta → contact
-document.querySelector('.nav-cta') && document.querySelector('.nav-cta').addEventListener('click', () => {
-  document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
-});
 
 // ── Parallax hero ────────────────────────────────────
 const heroLeft = document.getElementById('heroLeft');
@@ -2139,16 +2144,4 @@ window.addEventListener('scroll', () => {
       top:${-h}px;
       height:${h}px;
       opacity:${.18 + Math.random()*.36};
-      animation:rainDrop ${8 + Math.random()*14}s linear infinite ${Math.random()*18}s;
-    `;
-    container.appendChild(d);
-  }
-})();
-
-// ── Scroll-reveal ────────────────────────────────────
-const revealEls = document.querySelectorAll(
-  '.origin-card, .feat-item, .prod-card, .el-card, .stat-card, .v-item, .contact-detail, .contact-form-wrap, .contact-info-wrap'
-);
-const io = new IntersectionObserver((entries) => {
-  entries.forEach((e, i) => {
-    if (e.isIntersecting) {
+      animation:rainDrop ${8 + Math.random()*14}s linear infinit
