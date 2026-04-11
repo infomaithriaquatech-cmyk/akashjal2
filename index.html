@@ -4,7 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Akash Jal – Water, Born from the Sky</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=Noto+Serif+Devanagari:wght@300;400&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=Noto+Serif+Devanagari:wght@300;400&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet"/>
 <script>
 function goTo(id){
   var el=document.getElementById(id);
@@ -67,6 +67,10 @@ body{font-family:'DM Sans',sans-serif;color:#fff;overflow-x:hidden;background:#0
 @keyframes cardFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
 @keyframes shimmer{0%{transform:translateX(-100%);}100%{transform:translateX(100%);}}
 @keyframes particleRise{0%{transform:translateY(0);opacity:0;}20%{opacity:.7;}80%{opacity:.3;}100%{transform:translateY(-160px);opacity:0;}}
+@keyframes fabPop{0%{transform:scale(0) rotate(-180deg);opacity:0;}70%{transform:scale(1.12) rotate(8deg);}100%{transform:scale(1) rotate(0deg);opacity:1;}}
+@keyframes fabSlideIn{from{transform:translateY(80px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+@keyframes chatSlideUp{from{transform:translateY(24px) scale(.96);opacity:0;}to{transform:translateY(0) scale(1);opacity:1;}}
+@keyframes typingDot{0%,80%,100%{transform:translateY(0);opacity:.4;}40%{transform:translateY(-6px);opacity:1;}}
 
 /* ── FIXED BACKGROUND ── */
 .bg-wrap{position:fixed;inset:0;z-index:0;overflow:hidden;}
@@ -125,8 +129,9 @@ body{font-family:'DM Sans',sans-serif;color:#fff;overflow-x:hidden;background:#0
 .btn-gold:hover{background:rgba(201,165,90,.16);transform:translateY(-2px);}
 .glass-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.10);backdrop-filter:blur(18px);border-radius:24px;transition:transform .36s ease,box-shadow .36s ease,border-color .36s ease;}
 .glass-card:hover{transform:translateY(-6px);box-shadow:0 24px 60px rgba(0,0,0,.22);border-color:rgba(201,165,90,.22);}
-.reveal{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease;}
-.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal{opacity:1;transform:translateY(0);transition:opacity .7s ease,transform .7s ease;}
+.reveal.will-animate{opacity:0;transform:translateY(28px);}
+.reveal.will-animate.visible{opacity:1;transform:translateY(0);}
 
 /* ── NAVBAR ── */
 header{position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:14px 56px;background:rgba(2,12,26,.50);backdrop-filter:blur(24px);border-bottom:1px solid rgba(201,165,90,.12);}
@@ -154,15 +159,18 @@ nav.menu{display:flex;gap:28px;align-items:center;}
 
 /* ── HERO ── */
 .hero{min-height:100vh;display:flex;align-items:center;padding:80px 80px 60px;position:relative;overflow:hidden;}
-.hero-grid{width:100%;display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center;}
-.hero-left{animation:fadeUp .9s ease both;}
-.eyebrow{display:inline-flex;align-items:center;gap:10px;padding:9px 20px;border-radius:999px;border:1px solid rgba(201,165,90,.26);background:rgba(201,165,90,.07);font-size:10px;letter-spacing:.44em;color:var(--gold-light);margin-bottom:30px;}
-.eyebrow-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);}
-.sanskrit{font-family:'Noto Serif Devanagari','Cormorant Garamond',serif;font-size:16px;font-weight:300;color:rgba(130,200,255,.75);letter-spacing:.06em;line-height:1.7;margin-bottom:20px;font-style:italic;}
-.hero-title{font-family:'Cormorant Garamond',serif;font-size:100px;line-height:.88;letter-spacing:-.048em;font-weight:700;}
-.hero-title .accent{display:block;background:linear-gradient(125deg,var(--blue-light) 0%,var(--cyan) 40%,var(--gold-light) 80%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-.hero-sub{margin-top:24px;font-size:18.5px;line-height:1.82;color:var(--w65);max-width:640px;font-weight:300;}
-.hero-sub-small{margin-top:10px;font-size:15px;line-height:1.78;color:var(--w45);max-width:580px;}
+.hero-grid{position:relative;z-index:2;width:100%;display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center;}
+.hero-vid{position:absolute;inset:0;z-index:0;overflow:hidden;}
+.hero-vid video{width:100%;height:100%;object-fit:cover;display:block;}
+.hero-vid-tint{position:absolute;inset:0;z-index:1;background:linear-gradient(110deg,rgba(2,12,26,0.75) 0%,rgba(2,12,26,0.55) 55%,rgba(2,12,26,0.25) 100%);}
+.hero-left{animation:fadeUp .9s ease both;background:rgba(2,12,26,0.40);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.10);border-radius:26px;padding:40px 46px;}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;padding:9px 20px;border-radius:999px;border:1px solid rgba(130,200,255,.45);background:rgba(15,60,120,.50);font-size:10px;letter-spacing:.44em;color:#ceeeff;margin-bottom:30px;text-shadow:0 1px 8px rgba(0,0,0,.6);}
+.eyebrow-dot{width:5px;height:5px;border-radius:50%;background:#7dd8fa;box-shadow:0 0 8px #7dd8fa;}
+.sanskrit{font-family:'Noto Serif Devanagari','Cormorant Garamond',serif;font-size:16px;font-weight:300;color:#b8e0ff;letter-spacing:.06em;line-height:1.7;margin-bottom:20px;font-style:italic;text-shadow:0 2px 12px rgba(0,0,0,.65);}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:100px;line-height:.88;letter-spacing:-.048em;font-weight:700;color:#ffffff;text-shadow:0 4px 28px rgba(0,0,0,.6);}
+.hero-title .accent{display:block;background:linear-gradient(125deg,#d0eeff 0%,#7dd8fa 35%,#22d3ee 65%,#a8dff7 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 2px 14px rgba(0,140,220,.55));}
+.hero-sub{margin-top:24px;font-size:18.5px;line-height:1.82;color:rgba(225,242,255,.90);max-width:640px;font-weight:300;text-shadow:0 2px 14px rgba(0,0,0,.55);}
+.hero-sub-small{margin-top:10px;font-size:15px;line-height:1.78;color:rgba(190,220,245,.78);max-width:580px;text-shadow:0 1px 10px rgba(0,0,0,.50);}
 .hero-btns{display:flex;gap:14px;align-items:center;margin-top:36px;flex-wrap:wrap;}
 .hero-right{position:relative;display:flex;justify-content:center;align-items:center;min-height:520px;animation:fadeUp 1.1s .2s ease both;}
 .hero-glow{position:absolute;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(34,211,238,.14) 0%,rgba(61,143,200,.06) 40%,transparent 70%);filter:blur(20px);animation:glowPulse 8s ease-in-out infinite;}
@@ -174,6 +182,7 @@ nav.menu{display:flex;gap:28px;align-items:center;}
 .hero-can-img{width:420px;max-width:100%;height:auto;object-fit:contain;filter:drop-shadow(0 50px 90px rgba(0,0,0,.40));}
 .can-shadow{width:220px;height:24px;background:radial-gradient(ellipse,rgba(34,211,238,.18),transparent 70%);filter:blur(4px);margin-top:-4px;}
 
+
 /* ── MARQUEE ── */
 .marquee-strip{padding:32px 0;background:rgba(0,0,0,.32);border-top:1px solid rgba(255,255,255,.05);border-bottom:1px solid rgba(255,255,255,.05);overflow:hidden;backdrop-filter:blur(12px);}
 .marquee-track{display:flex;align-items:center;animation:marqueScroll 24s linear infinite;width:max-content;}
@@ -182,7 +191,7 @@ nav.menu{display:flex;gap:28px;align-items:center;}
 
 /* ── PHILOSOPHY ── */
 .philosophy-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:60px;}
-.phil-card{padding:44px 32px;border-radius:28px;background:linear-gradient(160deg,rgba(34,211,238,.06),rgba(2,12,26,.8));border:1px solid rgba(34,211,238,.15);text-align:center;position:relative;overflow:hidden;transition:transform .3s,border-color .3s;}
+.phil-card{padding:44px 32px;border-radius:28px;background:linear-gradient(160deg,rgba(34,211,238,.12),rgba(4,22,48,.92));border:1px solid rgba(34,211,238,.28);text-align:center;position:relative;overflow:hidden;transition:transform .3s,border-color .3s;box-shadow:0 4px 32px rgba(0,0,0,.30);}
 .phil-card:hover{transform:translateY(-8px);border-color:rgba(201,165,90,.30);}
 .phil-symbol{font-size:52px;display:block;margin-bottom:20px;line-height:1;}
 .phil-subtitle{font-size:9.5px;letter-spacing:.48em;color:var(--w45);text-transform:uppercase;margin-bottom:10px;}
@@ -193,8 +202,8 @@ nav.menu{display:flex;gap:28px;align-items:center;}
 /* ── GEOMETRY ── */
 .geometry-split{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:1300px;margin:60px auto 0;}
 .geo-card{border-radius:28px;padding:44px;border:1px solid;overflow:hidden;position:relative;}
-.geo-gold{border-color:rgba(201,165,90,.22);background:linear-gradient(180deg,rgba(201,165,90,.07),rgba(255,255,255,.02));}
-.geo-cyan{border-color:rgba(34,211,238,.18);background:linear-gradient(180deg,rgba(34,211,238,.07),rgba(255,255,255,.02));}
+.geo-gold{border-color:rgba(201,165,90,.40);background:linear-gradient(180deg,rgba(201,165,90,.14),rgba(4,18,40,.90));}
+.geo-cyan{border-color:rgba(34,211,238,.35);background:linear-gradient(180deg,rgba(34,211,238,.12),rgba(4,18,40,.90));}
 .geo-kicker{font-size:10px;letter-spacing:.42em;text-transform:uppercase;margin-bottom:14px;}
 .geo-kicker.gold{color:rgba(201,165,90,.75);}
 .geo-kicker.cyan{color:rgba(34,211,238,.65);}
@@ -227,7 +236,7 @@ nav.menu{display:flex;gap:28px;align-items:center;}
 /* ── SCIENCE ── */
 .science-split{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;max-width:1280px;margin:0 auto;}
 .science-steps{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-.sci-step{border-radius:22px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.04);padding:28px;cursor:pointer;transition:border-color .3s,background .3s,transform .3s;}
+.sci-step{border-radius:22px;border:1px solid rgba(34,211,238,.25);background:rgba(4,22,48,.85);padding:28px;cursor:pointer;transition:border-color .3s,background .3s,transform .3s;box-shadow:0 4px 24px rgba(0,0,0,.25);}
 .sci-step:hover{border-color:rgba(34,211,238,.25);background:rgba(34,211,238,.06);transform:translateY(-4px);}
 .sci-num{font-size:11.5px;color:rgba(34,211,238,.75);letter-spacing:.12em;margin-bottom:22px;}
 .sci-title{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;margin-bottom:10px;}
@@ -235,7 +244,7 @@ nav.menu{display:flex;gap:28px;align-items:center;}
 
 /* ── SUSTAINABILITY ── */
 .sustain-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:60px;}
-.sustain-card{border-radius:26px;border:1px solid rgba(255,255,255,.08);background:rgba(0,0,0,.35);padding:42px 32px;transition:transform .36s ease,border-color .36s;animation:cardFloat 6s ease-in-out infinite;}
+.sustain-card{border-radius:26px;border:1px solid rgba(34,211,238,.25);background:rgba(4,22,48,.85);padding:42px 32px;transition:transform .36s ease,border-color .36s;animation:cardFloat 6s ease-in-out infinite;box-shadow:0 4px 28px rgba(0,0,0,.28);}
 .sustain-card:nth-child(2){animation-delay:.8s;}
 .sustain-card:nth-child(3){animation-delay:1.6s;}
 .sustain-card:hover{transform:translateY(-8px);border-color:rgba(34,211,238,.22);}
@@ -249,21 +258,32 @@ nav.menu{display:flex;gap:28px;align-items:center;}
 .sku-pill{padding:8px 18px;border-radius:999px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);font-size:12.5px;color:var(--w65);cursor:pointer;transition:background .3s,border-color .3s,color .3s;}
 .sku-pill:hover,.sku-pill.active{background:rgba(34,211,238,.10);border-color:rgba(34,211,238,.30);color:#fff;}
 .products-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
-.prod-card{border-radius:24px;overflow:hidden;background:linear-gradient(170deg,rgba(255,255,255,.07),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.10);backdrop-filter:blur(14px);cursor:pointer;transition:transform .38s ease,box-shadow .38s ease,border-color .38s ease;}
+.prod-card{border-radius:24px;overflow:hidden;border:1px solid rgba(255,255,255,.22);cursor:pointer;transition:transform .38s ease,box-shadow .38s ease,border-color .38s ease;}
+.prod-card.blue {background:linear-gradient(170deg,rgba(30,85,160,.90),rgba(8,30,70,.95));}
+.prod-card.pink {background:linear-gradient(170deg,rgba(170,50,90,.90),rgba(70,10,35,.95));}
+.prod-card.amber{background:linear-gradient(170deg,rgba(170,100,20,.90),rgba(70,35,5,.95));}
+.prod-card.brown{background:linear-gradient(170deg,rgba(110,80,30,.90),rgba(45,28,8,.95));}
 .prod-card:hover{transform:translateY(-10px) scale(1.015);}
-.prod-card.blue:hover{border-color:rgba(82,168,225,.42);box-shadow:0 28px 70px rgba(61,143,200,.18);}
-.prod-card.pink:hover{border-color:rgba(220,110,130,.42);box-shadow:0 28px 70px rgba(200,100,120,.18);}
-.prod-card.amber:hover{border-color:rgba(210,155,60,.42);box-shadow:0 28px 70px rgba(200,140,60,.18);}
-.prod-card.brown:hover{border-color:rgba(175,140,75,.42);box-shadow:0 28px 70px rgba(160,130,70,.18);}
-.prod-img-wrap{height:330px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:18px 0 8px;}
-.prod-can-img{height:290px;width:auto;max-width:100%;object-fit:contain;filter:drop-shadow(0 20px 50px rgba(0,0,0,.34));transition:transform .5s ease;}
+.prod-card.blue:hover {border-color:rgba(100,180,255,.70);box-shadow:0 28px 70px rgba(40,120,220,.30);}
+.prod-card.pink:hover {border-color:rgba(230,120,150,.70);box-shadow:0 28px 70px rgba(200,80,110,.30);}
+.prod-card.amber:hover{border-color:rgba(230,170,60,.70);box-shadow:0 28px 70px rgba(200,140,40,.30);}
+.prod-card.brown:hover{border-color:rgba(190,155,80,.70);box-shadow:0 28px 70px rgba(160,120,50,.30);}
+.prod-img-wrap{height:300px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:16px 0 8px;}
+.prod-can-img{height:260px;width:auto;max-width:90%;object-fit:contain;filter:drop-shadow(0 20px 40px rgba(0,0,0,.50));transition:transform .5s ease;display:block;}
+.prod-can-img.img-error{display:none;}
 .prod-card:hover .prod-can-img{transform:scale(1.07) translateY(-8px);}
-.prod-glow{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:160px;height:44px;border-radius:50%;filter:blur(14px);opacity:.55;}
+.prod-glow{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:160px;height:44px;border-radius:50%;filter:blur(14px);opacity:.70;}
+/* SVG can placeholder */
+.can-placeholder{display:none;flex-direction:column;align-items:center;gap:12px;width:100%;height:100%;justify-content:center;animation:floatUp 5s ease-in-out infinite;}
+.can-placeholder.show{display:flex;}
+.can-placeholder svg{filter:drop-shadow(0 16px 40px rgba(0,0,0,.55));transition:transform .5s ease;}
+.prod-card:hover .can-placeholder svg{transform:scale(1.07) translateY(-8px);}
+.can-placeholder-label{font-size:9px;letter-spacing:.44em;text-transform:uppercase;opacity:.60;color:#fff;}
 .prod-info{padding:18px 22px 24px;}
-.prod-name{font-family:'Cormorant Garamond',serif;font-size:25px;font-weight:700;margin-bottom:4px;}
-.prod-variant{font-size:10.5px;letter-spacing:.34em;color:var(--w45);text-transform:uppercase;margin-bottom:12px;}
+.prod-name{font-family:'Cormorant Garamond',serif;font-size:25px;font-weight:700;margin-bottom:4px;color:#fff;}
+.prod-variant{font-size:10.5px;letter-spacing:.34em;color:rgba(255,255,255,.60);text-transform:uppercase;margin-bottom:12px;}
 .prod-tags{display:flex;gap:6px;flex-wrap:wrap;}
-.ptag{padding:4px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.04);font-size:10px;letter-spacing:.14em;color:var(--w45);}
+.ptag{padding:4px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.20);background:rgba(255,255,255,.10);font-size:10px;letter-spacing:.14em;color:rgba(255,255,255,.75);}
 
 /* ── BRAND STORY ── */
 .brand-story{padding:130px 80px;position:relative;overflow:hidden;}
@@ -312,6 +332,48 @@ nav.menu{display:flex;gap:28px;align-items:center;}
 .form-toast.error{background:rgba(239,68,68,.09);border:1px solid rgba(239,68,68,.26);color:rgba(252,165,165,1);}
 .form-toast.show{display:flex;}
 
+/* ── FLOATING BUTTONS ── */
+.fab-stack{position:fixed;bottom:32px;right:32px;z-index:999;display:flex;flex-direction:column;gap:14px;align-items:center;}
+.fab{width:54px;height:54px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .25s,box-shadow .25s;animation:fabSlideIn .5s ease both;}
+.fab:hover{transform:translateY(-3px) scale(1.07);}
+.fab-top{background:linear-gradient(135deg,rgba(34,211,238,.18),rgba(61,143,200,.22));border:1px solid rgba(34,211,238,.38);color:#7dd8fa;font-size:20px;box-shadow:0 8px 28px rgba(34,211,238,.20);backdrop-filter:blur(14px);animation-delay:.1s;opacity:0;display:none;}
+.fab-top.show{display:flex;animation:fabPop .45s .05s ease both;}
+.fab-chat{background:linear-gradient(135deg,#3a8fd4,#1e5fa0);border:1px solid rgba(100,180,255,.35);color:#fff;font-size:22px;box-shadow:0 10px 36px rgba(30,95,160,.50);animation-delay:.2s;}
+.fab-chat-badge{position:absolute;top:-3px;right:-3px;width:14px;height:14px;border-radius:50%;background:#22d3ee;border:2px solid #020c1a;animation:glowPulse 2s ease-in-out infinite;}
+
+/* ── ARYAN CHAT WIDGET ── */
+.chat-widget{position:fixed;bottom:100px;right:32px;z-index:998;width:360px;background:linear-gradient(160deg,rgba(4,18,38,.97),rgba(2,12,26,.99));border:1px solid rgba(61,143,200,.30);border-radius:24px;box-shadow:0 30px 80px rgba(0,0,0,.60),0 0 0 1px rgba(255,255,255,.04);overflow:hidden;display:none;animation:chatSlideUp .35s ease both;}
+.chat-widget.open{display:block;}
+.chat-head{background:linear-gradient(135deg,#1c4f84,#0f3360);padding:18px 20px;display:flex;align-items:center;gap:14px;position:relative;}
+.chat-avatar{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,#3a8fd4,#22d3ee);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:#fff;flex-shrink:0;box-shadow:0 0 20px rgba(34,211,238,.40);}
+.chat-head-info{}
+.chat-head-name{font-size:15px;font-weight:600;color:#fff;letter-spacing:.04em;}
+.chat-head-role{font-size:11px;color:rgba(130,200,255,.80);margin-top:1px;}
+.chat-head-status{display:flex;align-items:center;gap:5px;margin-top:3px;}
+.chat-status-dot{width:7px;height:7px;border-radius:50%;background:#22d3ee;box-shadow:0 0 8px #22d3ee;}
+.chat-status-txt{font-size:10px;color:rgba(34,211,238,.85);}
+.chat-close{position:absolute;right:16px;top:16px;background:rgba(255,255,255,.10);border:none;color:#fff;width:28px;height:28px;border-radius:50%;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;transition:background .2s;}
+.chat-close:hover{background:rgba(255,255,255,.20);}
+.chat-body{height:300px;overflow-y:auto;padding:18px 16px;display:flex;flex-direction:column;gap:12px;scrollbar-width:thin;scrollbar-color:rgba(61,143,200,.3) transparent;}
+.chat-msg{max-width:82%;padding:11px 15px;border-radius:18px;font-size:13.5px;line-height:1.6;}
+.chat-msg.bot{background:rgba(61,143,200,.14);border:1px solid rgba(61,143,200,.20);color:rgba(220,240,255,.92);border-radius:4px 18px 18px 18px;align-self:flex-start;}
+.chat-msg.user{background:linear-gradient(135deg,rgba(61,143,200,.30),rgba(34,211,238,.20));border:1px solid rgba(34,211,238,.22);color:#fff;border-radius:18px 18px 4px 18px;align-self:flex-end;}
+.chat-msg-time{font-size:10px;color:rgba(255,255,255,.30);margin-top:3px;}
+.chat-typing{display:flex;gap:5px;align-items:center;padding:10px 15px;background:rgba(61,143,200,.10);border-radius:4px 18px 18px 18px;width:fit-content;}
+.chat-typing span{width:7px;height:7px;border-radius:50%;background:rgba(130,200,255,.70);}
+.chat-typing span:nth-child(1){animation:typingDot 1.2s .0s ease-in-out infinite;}
+.chat-typing span:nth-child(2){animation:typingDot 1.2s .2s ease-in-out infinite;}
+.chat-typing span:nth-child(3){animation:typingDot 1.2s .4s ease-in-out infinite;}
+.chat-quick{padding:10px 16px 12px;display:flex;flex-wrap:wrap;gap:7px;border-top:1px solid rgba(255,255,255,.06);}
+.chat-quick-btn{padding:7px 13px;border-radius:999px;border:1px solid rgba(61,143,200,.30);background:rgba(61,143,200,.08);color:rgba(200,230,255,.85);font-size:11.5px;cursor:pointer;transition:background .2s,border-color .2s;white-space:nowrap;}
+.chat-quick-btn:hover{background:rgba(61,143,200,.20);border-color:rgba(61,143,200,.55);}
+.chat-input-row{display:flex;gap:8px;padding:12px 16px;border-top:1px solid rgba(255,255,255,.06);}
+.chat-input{flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);border-radius:12px;padding:11px 14px;color:#fff;font-size:13.5px;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .3s;}
+.chat-input:focus{border-color:rgba(61,143,200,.45);}
+.chat-input::placeholder{color:rgba(255,255,255,.25);}
+.chat-send{width:40px;height:40px;border-radius:12px;border:none;background:linear-gradient(135deg,#3a8fd4,#1e5fa0);color:#fff;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .2s,box-shadow .2s;}
+.chat-send:hover{transform:scale(1.08);box-shadow:0 4px 16px rgba(34,211,238,.30);}
+
 /* ── FOOTER ── */
 footer{position:relative;z-index:1;background:rgba(0,0,0,.68);backdrop-filter:blur(28px);border-top:1px solid rgba(201,165,90,.12);}
 .footer-main{max-width:1340px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1.6fr;gap:52px;padding:68px 56px 52px;}
@@ -332,49 +394,134 @@ footer{position:relative;z-index:1;background:rgba(0,0,0,.68);backdrop-filter:bl
 .footer-rule{max-width:1340px;margin:0 56px;height:1px;background:linear-gradient(90deg,transparent,rgba(201,165,90,.20),transparent);}
 .footer-bottom{max-width:1340px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding:22px 56px 30px;flex-wrap:wrap;gap:12px;}
 .footer-copy{font-size:12px;color:rgba(255,255,255,.35);letter-spacing:.06em;}
-.footer-crafted{font-size:11.5px;color:rgba(255,255,255,.36);font-style:italic;}
+.footer-crafted{font-size:11.5px;color:rgba(255,255,255,.36);}
+.footer-crafted-name{font-family:'Dancing Script','Pacifico',cursive;font-size:16px;font-weight:700;background:linear-gradient(125deg,var(--gold-light),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:.04em;}
 .footer-crafted strong{color:var(--gold-light);font-style:normal;font-weight:700;letter-spacing:.08em;}
 .footer-legal{display:flex;gap:20px;}
 .footer-legal-link{font-size:11.5px;color:rgba(255,255,255,.35);cursor:pointer;transition:color .25s;}
 .footer-legal-link:hover{color:var(--gold-light);}
 
-/* ── RESPONSIVE ── */
+/* ══════════════════════════════════════════
+   RESPONSIVE — ALL SCREEN SIZES
+   ══════════════════════════════════════════ */
+
+/* Large Desktop 1400px+ */
+@media(min-width:1400px){
+  .hero-title{font-size:110px;}
+  .footer-main{max-width:1500px;}
+}
+
+/* Desktop 1200–1400 */
+@media(max-width:1400px){
+  .hero-title{font-size:88px;}
+  .hero-grid{gap:40px;}
+}
 @media(max-width:1200px){
-  .products-grid{grid-template-columns:repeat(2,1fr) !important;}
-  .footer-main{grid-template-columns:1fr 1fr !important;gap:36px;}
-  .contact-grid{grid-template-columns:1fr !important;}
+  .products-grid{grid-template-columns:repeat(2,1fr)!important;}
+  .footer-main{grid-template-columns:1fr 1fr!important;gap:36px;}
+  .contact-grid{grid-template-columns:1fr!important;}
   .form-wrap{order:-1;}
-  .geometry-split{grid-template-columns:1fr !important;}
+  .geometry-split{grid-template-columns:1fr!important;}
+  .hero-title{font-size:78px;}
+  .section,.section-dark{padding:90px 56px;}
+  .brand-story{padding:90px 56px;}
 }
+
+/* Tablet landscape 1080px */
 @media(max-width:1080px){
-  .hero-grid,.science-split,.products-intro{grid-template-columns:1fr !important;}
-  .philosophy-grid,.flow-steps,.sustain-cards{grid-template-columns:1fr !important;}
-  nav.menu,.nav-cta{display:none !important;}
-  .hamburger{display:flex;}
-  .hero-title{font-size:68px !important;}
-  .section,.section-dark,.hero,.brand-story,.contact-section{padding-left:28px !important;padding-right:28px !important;}
-  header{padding:12px 22px !important;}
+  .hero-grid,.science-split,.products-intro{grid-template-columns:1fr!important;}
+  .philosophy-grid,.flow-steps,.sustain-cards{grid-template-columns:1fr!important;}
+  nav.menu,.nav-cta{display:none!important;}
+  .hamburger{display:flex!important;}
+  .hero{padding:70px 40px 50px;}
+  .hero-title{font-size:68px!important;}
+  .hero-right{min-height:380px;}
+  .hero-can-img{width:340px!important;}
+  .section,.section-dark{padding:80px 40px!important;}
+  .brand-story,.contact-section{padding-left:40px!important;padding-right:40px!important;}
+  header{padding:12px 24px!important;}
   .flow-steps::before{display:none;}
-  .closing-block{padding:44px 32px !important;}
+  .closing-block{padding:44px 32px!important;}
+  .sec-title{font-size:52px!important;}
+  /* Chat widget full-width on tablet */
+  .chat-widget{width:calc(100vw - 48px);right:24px;}
 }
+
+/* Tablet portrait 768px */
 @media(max-width:768px){
-  .hero-title{font-size:52px !important;line-height:.90 !important;}
-  .sec-title{font-size:42px !important;}
-  .hero-can-img{width:300px !important;}
-  .form-row{grid-template-columns:1fr !important;}
-  .science-steps{grid-template-columns:1fr !important;}
-  .closing-title{font-size:34px !important;}
+  .hero{padding:60px 24px 40px;}
+  .hero-title{font-size:52px!important;line-height:.92!important;}
+  .hero-sub{font-size:16px;}
+  .hero-left{padding:28px 26px;}
+  .hero-right{min-height:300px;margin-top:24px;}
+  .hero-can-img{width:260px!important;}
+  .hero-glow{width:320px;height:320px;}
+  .hero-ring-1{width:300px;height:300px;}
+  .hero-ring-2{width:220px;height:220px;}
+  .hero-ring-3{width:140px;height:140px;}
+  .sec-title{font-size:40px!important;}
+  .story-quote{font-size:36px!important;}
+  .form-row{grid-template-columns:1fr!important;}
+  .science-steps{grid-template-columns:1fr!important;}
+  .closing-title{font-size:32px!important;}
+  .closing-block{padding:36px 24px!important;}
+  .section,.section-dark{padding:70px 24px!important;}
+  .brand-story{padding:70px 24px!important;}
+  .products-grid{grid-template-columns:1fr!important;}
+  /* Marquee smaller */
+  .marquee-item{font-size:10px;padding:0 24px;}
+  /* FABs */
+  .fab-stack{bottom:20px;right:18px;}
+  .fab{width:48px;height:48px;}
+  /* Chat widget */
+  .chat-widget{width:calc(100vw - 32px);right:16px;bottom:80px;}
+  .chat-body{height:240px;}
 }
+
+/* Mobile large 600px */
 @media(max-width:600px){
-  .hero-title{font-size:42px !important;}
-  .sec-title{font-size:36px !important;}
-  .products-grid{grid-template-columns:1fr !important;}
-  .footer-main{grid-template-columns:1fr !important;padding:36px 22px !important;}
-  .footer-bottom{padding:18px 22px 26px !important;flex-direction:column;align-items:flex-start;}
-  .footer-rule{margin-left:22px !important;margin-right:22px !important;}
-  .hero-btns{flex-direction:column;align-items:flex-start;}
+  .hero{padding:50px 18px 36px;}
+  .hero-title{font-size:42px!important;letter-spacing:-.032em!important;}
+  .hero-sub{font-size:15px!important;}
+  .hero-sub-small{font-size:13px!important;}
+  .hero-left{padding:22px 20px;border-radius:18px;}
+  .hero-btns{flex-direction:column;align-items:stretch;}
   .btn-white,.btn-ghost{width:100%;justify-content:center;}
-  .closing-block{margin-top:60px !important;}
+  .sec-title{font-size:34px!important;}
+  .kicker{font-size:9px;letter-spacing:.32em;}
+  .section,.section-dark{padding:60px 18px!important;}
+  .brand-story{padding:60px 18px!important;}
+  .contact-section{padding:60px 18px!important;}
+  .footer-main{grid-template-columns:1fr!important;padding:36px 18px!important;gap:28px;}
+  .footer-bottom{padding:16px 18px 24px!important;flex-direction:column;align-items:flex-start;gap:8px;}
+  .footer-rule{margin-left:18px!important;margin-right:18px!important;}
+  .closing-block{margin-top:48px!important;padding:28px 18px!important;}
+  header{padding:10px 18px!important;}
+  .nav-logo-img{width:54px;height:54px;}
+  .nav-brand{font-size:16px;}
+  /* Products */
+  .products-grid{grid-template-columns:1fr!important;}
+  .sku-pill{font-size:10px;padding:7px 14px;}
+  /* Science */
+  .sci-step{padding:20px!important;}
+  /* Chat */
+  .chat-widget{width:calc(100vw - 24px);right:12px;left:12px;border-radius:18px;}
+  .chat-head{padding:14px 16px;}
+  .chat-avatar{width:38px;height:38px;font-size:16px;}
+  .chat-quick-btn{font-size:10.5px;padding:6px 11px;}
+  /* FABs */
+  .fab-stack{bottom:16px;right:14px;gap:10px;}
+  .fab{width:46px;height:46px;font-size:18px;}
+}
+
+/* Mobile small 400px */
+@media(max-width:400px){
+  .hero-title{font-size:36px!important;}
+  .sec-title{font-size:30px!important;}
+  .hero-left{padding:18px 16px;}
+  .hero-can-img{width:200px!important;}
+  .story-quote{font-size:28px!important;}
+  .chat-widget{width:calc(100vw - 16px);right:8px;left:8px;}
 }
 </style>
 </head>
@@ -433,6 +580,12 @@ footer{position:relative;z-index:1;background:rgba(0,0,0,.68);backdrop-filter:bl
 
 <!-- ── HERO ── -->
 <section class="hero z1" id="hero">
+  <div class="hero-vid">
+    <video autoplay muted loop playsinline>
+      <source src="hero-video.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="hero-vid-tint"></div>
   <div class="hero-grid">
     <div class="hero-left">
       <div class="eyebrow">
@@ -708,10 +861,15 @@ footer{position:relative;z-index:1;background:rgba(0,0,0,.68);backdrop-filter:bl
     </div>
   </div>
   <div class="products-grid">
+    <!-- Blue -->
     <div class="prod-card blue reveal">
       <div class="prod-img-wrap">
-        <img src="blue.png" alt="Regular Blue" class="prod-can-img" onerror="this.style.display='none'"/>
-        <div class="prod-glow" style="background:radial-gradient(circle,rgba(61,143,200,.55),transparent 70%);"></div>
+        <img src="blue.png" alt="Regular Blue" class="prod-can-img" onerror="this.classList.add('img-error');this.parentElement.querySelector('.can-placeholder').classList.add('show');"/>
+        <div class="prod-glow" style="background:radial-gradient(circle,rgba(80,160,255,.80),transparent 70%);"></div>
+        <div class="can-placeholder">
+          <svg width="100" height="200" viewBox="0 0 100 200"><defs><linearGradient id="cg1" x1="0" x2="1" y1="0" y2="0"><stop offset="0%" stop-color="#1255aa"/><stop offset="45%" stop-color="#3d8fc8"/><stop offset="75%" stop-color="#82c8f0"/><stop offset="100%" stop-color="#1255aa"/></linearGradient></defs><rect x="6" y="16" width="88" height="170" rx="13" fill="url(#cg1)"/><ellipse cx="50" cy="16" rx="44" ry="10" fill="#1a6ab5"/><ellipse cx="50" cy="186" rx="44" ry="10" fill="#0e4a8a"/><text x="50" y="85" text-anchor="middle" font-family="serif" font-size="12" fill="#fff" font-weight="700" letter-spacing="2">AKASH</text><text x="50" y="102" text-anchor="middle" font-family="serif" font-size="10" fill="rgba(255,255,255,.8)" letter-spacing="2">JAL</text><text x="50" y="126" text-anchor="middle" font-family="sans-serif" font-size="7" fill="rgba(255,255,255,.55)" letter-spacing="1">PURE · ALKALINE</text><ellipse cx="50" cy="68" rx="16" ry="16" fill="none" stroke="rgba(255,255,255,.30)" stroke-width="1"/><text x="50" y="73" text-anchor="middle" font-size="14">💧</text></svg>
+          <span class="can-placeholder-label">Regular Blue</span>
+        </div>
       </div>
       <div class="prod-info">
         <div class="prod-name">Regular Blue</div>
@@ -719,10 +877,15 @@ footer{position:relative;z-index:1;background:rgba(0,0,0,.68);backdrop-filter:bl
         <div class="prod-tags"><span class="ptag">Air-Sourced</span><span class="ptag">pH 8+</span><span class="ptag">Ultra-low TDS</span></div>
       </div>
     </div>
+    <!-- Pink -->
     <div class="prod-card pink reveal">
       <div class="prod-img-wrap">
-        <img src="guava.png" alt="Guava Pink" class="prod-can-img" onerror="this.style.display='none'"/>
-        <div class="prod-glow" style="background:radial-gradient(circle,rgba(210,100,115,.55),transparent 70%);"></div>
+        <img src="guava.png" alt="Guava Pink" class="prod-can-img" onerror="this.classList.add('img-error');this.parentElement.querySelector('.can-placeholder').classList.add('show');"/>
+        <div class="prod-glow" style="background:radial-gradient(circle,rgba(220,100,130,.80),transparent 70%);"></div>
+        <div class="can-placeholder">
+          <svg width="100" height="200" viewBox="0 0 100 200"><defs><linearGradient id="cg2" x1="0" x2="1" y1="0" y2="0"><stop offset="0%" stop-color="#8a1a40"/><stop offset="45%" stop-color="#cc5070"/><stop offset="75%" stop-color="#f0a0b5"/><stop offset="100%" stop-color="#8a1a40"/></linearGradient></defs><rect x="6" y="16" width="88" height="170" rx="13" fill="url(#cg2)"/><ellipse cx="50" cy="16" rx="44" ry="10" fill="#a52a55"/><ellipse cx="50" cy="186" rx="44" ry="10" fill="#6e1230"/><text x="50" y="85" text-anchor="middle" font-family="serif" font-size="12" fill="#fff" font-weight="700" letter-spacing="2">AKASH</text><text x="50" y="102" text-anchor="middle" font-family="serif" font-size="10" fill="rgba(255,255,255,.8)" letter-spacing="2">JAL</text><text x="50" y="126" text-anchor="middle" font-family="sans-serif" font-size="7" fill="rgba(255,255,255,.55)" letter-spacing="1">GUAVA · TROPICAL</text><ellipse cx="50" cy="68" rx="16" ry="16" fill="none" stroke="rgba(255,255,255,.30)" stroke-width="1"/><text x="50" y="73" text-anchor="middle" font-size="14">🍈</text></svg>
+          <span class="can-placeholder-label">Guava Pink</span>
+        </div>
       </div>
       <div class="prod-info">
         <div class="prod-name">Guava Pink</div>
@@ -730,10 +893,15 @@ footer{position:relative;z-index:1;background:rgba(0,0,0,.68);backdrop-filter:bl
         <div class="prod-tags"><span class="ptag">Air-Sourced</span><span class="ptag">Mineral Balanced</span><span class="ptag">330ml</span></div>
       </div>
     </div>
+    <!-- Amber -->
     <div class="prod-card amber reveal">
       <div class="prod-img-wrap">
-        <img src="cinnamon.png" alt="Cinnamon Amber" class="prod-can-img" onerror="this.style.display='none'"/>
-        <div class="prod-glow" style="background:radial-gradient(circle,rgba(201,140,55,.55),transparent 70%);"></div>
+        <img src="cinnamon.png" alt="Cinnamon Amber" class="prod-can-img" onerror="this.classList.add('img-error');this.parentElement.querySelector('.can-placeholder').classList.add('show');"/>
+        <div class="prod-glow" style="background:radial-gradient(circle,rgba(210,145,40,.80),transparent 70%);"></div>
+        <div class="can-placeholder">
+          <svg width="100" height="200" viewBox="0 0 100 200"><defs><linearGradient id="cg3" x1="0" x2="1" y1="0" y2="0"><stop offset="0%" stop-color="#7a3a00"/><stop offset="45%" stop-color="#c07820"/><stop offset="75%" stop-color="#e8b060"/><stop offset="100%" stop-color="#7a3a00"/></linearGradient></defs><rect x="6" y="16" width="88" height="170" rx="13" fill="url(#cg3)"/><ellipse cx="50" cy="16" rx="44" ry="10" fill="#9a5510"/><ellipse cx="50" cy="186" rx="44" ry="10" fill="#5c2a00"/><text x="50" y="85" text-anchor="middle" font-family="serif" font-size="12" fill="#fff" font-weight="700" letter-spacing="2">AKASH</text><text x="50" y="102" text-anchor="middle" font-family="serif" font-size="10" fill="rgba(255,255,255,.8)" letter-spacing="2">JAL</text><text x="50" y="126" text-anchor="middle" font-family="sans-serif" font-size="7" fill="rgba(255,255,255,.55)" letter-spacing="1">CINNAMON · SPICED</text><ellipse cx="50" cy="68" rx="16" ry="16" fill="none" stroke="rgba(255,255,255,.30)" stroke-width="1"/><text x="50" y="73" text-anchor="middle" font-size="14">🌿</text></svg>
+          <span class="can-placeholder-label">Cinnamon Amber</span>
+        </div>
       </div>
       <div class="prod-info">
         <div class="prod-name">Cinnamon Amber</div>
@@ -741,10 +909,15 @@ footer{position:relative;z-index:1;background:rgba(0,0,0,.68);backdrop-filter:bl
         <div class="prod-tags"><span class="ptag">Air-Sourced</span><span class="ptag">pH 8+</span><span class="ptag">330ml</span></div>
       </div>
     </div>
+    <!-- Brown -->
     <div class="prod-card brown reveal">
       <div class="prod-img-wrap">
-        <img src="jeera.png" alt="Jeera Brown" class="prod-can-img" onerror="this.style.display='none'"/>
-        <div class="prod-glow" style="background:radial-gradient(circle,rgba(160,130,70,.55),transparent 70%);"></div>
+        <img src="jeera.png" alt="Jeera Brown" class="prod-can-img" onerror="this.classList.add('img-error');this.parentElement.querySelector('.can-placeholder').classList.add('show');"/>
+        <div class="prod-glow" style="background:radial-gradient(circle,rgba(155,120,55,.80),transparent 70%);"></div>
+        <div class="can-placeholder">
+          <svg width="100" height="200" viewBox="0 0 100 200"><defs><linearGradient id="cg4" x1="0" x2="1" y1="0" y2="0"><stop offset="0%" stop-color="#3a2008"/><stop offset="45%" stop-color="#7a5520"/><stop offset="75%" stop-color="#b08840"/><stop offset="100%" stop-color="#3a2008"/></linearGradient></defs><rect x="6" y="16" width="88" height="170" rx="13" fill="url(#cg4)"/><ellipse cx="50" cy="16" rx="44" ry="10" fill="#5a3a12"/><ellipse cx="50" cy="186" rx="44" ry="10" fill="#2a1405"/><text x="50" y="85" text-anchor="middle" font-family="serif" font-size="12" fill="#fff" font-weight="700" letter-spacing="2">AKASH</text><text x="50" y="102" text-anchor="middle" font-family="serif" font-size="10" fill="rgba(255,255,255,.8)" letter-spacing="2">JAL</text><text x="50" y="126" text-anchor="middle" font-family="sans-serif" font-size="7" fill="rgba(255,255,255,.55)" letter-spacing="1">JEERA · EARTHY</text><ellipse cx="50" cy="68" rx="16" ry="16" fill="none" stroke="rgba(255,255,255,.30)" stroke-width="1"/><text x="50" y="73" text-anchor="middle" font-size="14">🌾</text></svg>
+          <span class="can-placeholder-label">Jeera Brown</span>
+        </div>
       </div>
       <div class="prod-info">
         <div class="prod-name">Jeera Brown</div>
@@ -791,7 +964,7 @@ footer{position:relative;z-index:1;background:rgba(0,0,0,.68);backdrop-filter:bl
       <div class="contact-info-title">We're ready to<br>partner with you.</div>
       <p class="contact-desc">Akash Jal is actively seeking distribution partnerships, hospitality integrations, and investor conversations across India and globally.</p>
       <div class="contact-detail"><div class="cd-icon">📞</div><div><div class="cd-label">Phone</div><div class="cd-val">+91 99080 11939</div></div></div>
-      <div class="contact-detail"><div class="cd-icon">✉️</div><div><div class="cd-label">Email</div><div class="cd-val"><a href="mailto:info@akashjal.com">info@akashjal.com</a></div></div></div>
+      <div class="contact-detail"><div class="cd-icon">✉️</div><div><div class="cd-label">Email</div><div class="cd-val"><a href="/cdn-cgi/l/email-protection#a3cacdc5cce3c2c8c2d0cbc9c2cf8dc0ccce"><span class="__cf_email__" data-cfemail="167f78707956777d77657e7c777a3875797b">[email&#160;protected]</span></a></div></div></div>
       <div class="contact-detail"><div class="cd-icon">🌐</div><div><div class="cd-label">Website</div><div class="cd-val"><a href="https://www.akashjal.com" target="_blank">www.akashjal.com</a></div></div></div>
       <div class="contact-detail"><div class="cd-icon">📍</div><div><div class="cd-label">Address</div><div class="cd-val">Plot No. 134, I.D.A., Phase III<br>Cherlapally, TSIIC-IALA<br>Hyderabad – 500051</div></div></div>
     </div>
@@ -821,7 +994,7 @@ footer{position:relative;z-index:1;background:rgba(0,0,0,.68);backdrop-filter:bl
         <div class="btn-spinner"></div>
       </button>
       <div class="form-toast success" id="toastSuccess"><span>✅</span><span>Message sent! We'll get back to you within 24 hours.</span></div>
-      <div class="form-toast error" id="toastError"><span>⚠️</span><span id="toastMsg">Something went wrong. Please email info@akashjal.com directly.</span></div>
+      <div class="form-toast error" id="toastError"><span>⚠️</span><span id="toastMsg">Something went wrong. Please email <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dcb5b2bab39cbdb7bdafb4b6bdb0f2bfb3b1">[email&#160;protected]</a> directly.</span></div>
     </div>
   </div>
 </section>
@@ -861,7 +1034,7 @@ footer{position:relative;z-index:1;background:rgba(0,0,0,.68);backdrop-filter:bl
       <div class="footer-contact-label">Phone</div>
       <div class="footer-contact-val">+91 99080 11939</div>
       <div class="footer-contact-label">Email</div>
-      <div class="footer-contact-val"><a href="mailto:info@akashjal.com">info@akashjal.com</a></div>
+      <div class="footer-contact-val"><a href="/cdn-cgi/l/email-protection#a4cdcac2cbe4c5cfc5d7cccec5c88ac7cbc9"><span class="__cf_email__" data-cfemail="5e373038311e3f353f2d36343f32703d3133">[email&#160;protected]</span></a></div>
       <div class="footer-contact-label">Website</div>
       <div class="footer-contact-val"><a href="https://www.akashjal.com" target="_blank">www.akashjal.com</a></div>
       <div class="footer-contact-label">Address</div>
@@ -871,7 +1044,7 @@ footer{position:relative;z-index:1;background:rgba(0,0,0,.68);backdrop-filter:bl
   <div class="footer-rule"></div>
   <div class="footer-bottom">
     <div class="footer-copy">© 2026 Prana AkashJal Pvt. Ltd. — All Rights Reserved.</div>
-    <div class="footer-crafted"><em>Crafted with care by</em> <strong>ARYAN MOHANTY</strong></div>
+    <div class="footer-crafted"><em>Crafted with care by</em> <span class="footer-crafted-name">Aryan Mohanty</span></div>
     <div class="footer-legal">
       <span class="footer-legal-link">Privacy Policy</span>
       <span class="footer-legal-link">Terms of Use</span>
@@ -879,7 +1052,51 @@ footer{position:relative;z-index:1;background:rgba(0,0,0,.68);backdrop-filter:bl
   </div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<!-- ── FLOATING BUTTONS ── -->
+<div class="fab-stack">
+  <button class="fab fab-top" id="fabTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to Top">↑</button>
+  <div style="position:relative;">
+    <button class="fab fab-chat" id="fabChat" onclick="toggleChat()" title="Chat with Aryan">💬</button>
+    <div class="fab-chat-badge" id="chatBadge"></div>
+  </div>
+</div>
+
+<!-- ── ARYAN CHAT WIDGET ── -->
+<div class="chat-widget" id="chatWidget">
+  <div class="chat-head">
+    <div class="chat-avatar">A</div>
+    <div class="chat-head-info">
+      <div class="chat-head-name">Aryan — Akash Jal</div>
+      <div class="chat-head-role">Brand & Product Specialist</div>
+      <div class="chat-head-status"><div class="chat-status-dot"></div><span class="chat-status-txt">Online now</span></div>
+    </div>
+    <button class="chat-close" onclick="toggleChat()">✕</button>
+  </div>
+  <div class="chat-body" id="chatBody">
+    <div class="chat-msg bot">
+      Namaste! 🙏 I'm Aryan, your guide to <strong>Akash Jal</strong> — premium water born from the sky.<br><br>How can I help you today?
+      <div class="chat-msg-time">Just now</div>
+    </div>
+  </div>
+  <div class="chat-quick" id="chatQuick">
+    <button class="chat-quick-btn" onclick="sendQuick('about')">🏢 About Us</button>
+    <button class="chat-quick-btn" onclick="sendQuick('products')">💧 Products</button>
+    <button class="chat-quick-btn" onclick="sendQuick('technology')">⚗️ Technology</button>
+    <button class="chat-quick-btn" onclick="sendQuick('philosophy')">🕉️ Philosophy</button>
+    <button class="chat-quick-btn" onclick="sendQuick('sustainability')">🌿 Eco Mission</button>
+    <button class="chat-quick-btn" onclick="sendQuick('geometry')">🔷 Sacred Geometry</button>
+    <button class="chat-quick-btn" onclick="sendQuick('partner')">🤝 Partnership</button>
+    <button class="chat-quick-btn" onclick="sendQuick('contact')">📍 Contact</button>
+    <button class="chat-quick-btn" onclick="sendQuick('founder')">👤 Founder</button>
+    <button class="chat-quick-btn" onclick="sendQuick('certifications')">🏅 Certifications</button>
+  </div>
+  <div class="chat-input-row">
+    <input class="chat-input" id="chatInput" placeholder="Ask me anything…" onkeydown="if(event.key==='Enter')sendChat()"/>
+    <button class="chat-send" onclick="sendChat()">➤</button>
+  </div>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
 // ── EmailJS ──────────────────────────────────────────
 const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';
@@ -933,15 +1150,19 @@ document.querySelectorAll('.sku-pill').forEach(p=>{
 });
 
 // ── Scroll reveal ─────────────────────────────────────
+// Mark elements for animation (they stay visible by default if JS fails)
+document.querySelectorAll('.reveal').forEach(el=>el.classList.add('will-animate'));
 const io=new IntersectionObserver(entries=>{
   entries.forEach((e,i)=>{
     if(e.isIntersecting){
-      setTimeout(()=>e.target.classList.add('visible'),i*80);
+      setTimeout(()=>e.target.classList.add('visible'),i*60);
       io.unobserve(e.target);
     }
   });
-},{threshold:.12});
+},{threshold:0.05,rootMargin:'0px 0px 60px 0px'});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+// Safety: after 1.5s make everything visible regardless
+setTimeout(()=>{document.querySelectorAll('.reveal.will-animate:not(.visible)').forEach(el=>el.classList.add('visible'));},1500);
 
 // ── Parallax hero ─────────────────────────────────────
 const heroLeft=document.querySelector('.hero-left');
@@ -974,15 +1195,196 @@ window.addEventListener('scroll',()=>{
     });
     mists.forEach(m=>{
       m.life-=m.decay;m.y+=m.vy;
-      if(m.life<=0){m.x=Math.random();m.y=.6+Math.random()*.4;m.life=Math.random()*.5+.2;m.alpha=Math.random()*.08+.02;}
-      const g=ctx.createRadialGradient(m.x*canvas.width,m.y*canvas.height,0,m.x*canvas.width,m.y*canvas.height,m.r*16);
-      g.addColorStop(0,'rgba(140,200,255,'+(m.alpha*Math.min(m.life*2,1))+')');g.addColorStop(1,'transparent');
-      ctx.beginPath();ctx.arc(m.x*canvas.width,m.y*canvas.height,m.r*16,0,Math.PI*2);ctx.fillStyle=g;ctx.fill();
+      if(m.life<=0){m.x=Math.random();m.y=.6+Math.random()*.4;m.life=Math.random();m.decay=Math.random()*.0007+.0003;}
+      const a=m.life*m.alpha;
+      const grad=ctx.createRadialGradient(m.x*canvas.width,m.y*canvas.height,0,m.x*canvas.width,m.y*canvas.height,m.r*canvas.width*.012);
+      grad.addColorStop(0,`rgba(180,210,255,${a})`);grad.addColorStop(1,'rgba(180,210,255,0)');
+      ctx.beginPath();ctx.arc(m.x*canvas.width,m.y*canvas.height,m.r*canvas.width*.012,0,Math.PI*2);
+      ctx.fillStyle=grad;ctx.fill();
     });
     requestAnimationFrame(draw);
   }
   draw();
 })();
+
+// ── Back to Top ──────────────────────────────────────
+const fabTop = document.getElementById('fabTop');
+window.addEventListener('scroll',()=>{
+  if(window.scrollY > 400){ fabTop.classList.add('show'); }
+  else { fabTop.classList.remove('show'); }
+},{passive:true});
+
+// ── Aryan Chat — Rich Knowledge Base ─────────────────
+const KB = {
+  about:`<strong>🌊 Prana AkashJal Pvt. Ltd.</strong><br><br>
+We are India's first <em>premium atmospheric water brand</em> — <strong>"Water, Born from the Sky."</strong><br><br>
+We extract pure water directly from atmospheric air using advanced AWG (Atmospheric Water Generation) technology, guided by ancient Indian elemental philosophy.<br><br>
+📍 Based in <strong>Hyderabad, Telangana</strong><br>
+🌐 <strong>www.akashjal.com</strong><br>
+📧 <strong>info@akashjal.com</strong>`,
+
+  products:`<strong>💧 Our Products</strong><br><br>
+<strong>Flagship — 330ml Aluminium Can</strong><br>
+• Premium atmospheric water in a sleek, recyclable aluminium can<br>
+• Alkaline pH 8+ for better hydration & body balance<br>
+• Ultra-Low TDS (Total Dissolved Solids) — exceptionally clean<br>
+• Zero synthetic additives or minerals added<br>
+• Infused with Panchabhuta philosophy in every drop<br><br>
+<strong>Designed for:</strong> Hotels, Airlines, Restaurants, Premium Retail, Wellness Brands, Events & Corporate gifting<br><br>
+📩 For bulk pricing & orders: <strong>info@akashjal.com</strong>`,
+
+  technology:`<strong>⚗️ Air-to-Water Technology (AWG)</strong><br><br>
+Our multi-stage purification process:<br><br>
+<strong>1. Air Intake</strong> — Atmospheric air is drawn in through precision filters<br>
+<strong>2. Condensation</strong> — Air is cooled to dew point; moisture condenses into raw water<br>
+<strong>3. Pre-filtration</strong> — Removes dust, particulates, and contaminants<br>
+<strong>4. RO Purification</strong> — Reverse osmosis removes dissolved solids<br>
+<strong>5. UV Sterilisation</strong> — Eliminates bacteria, viruses and microorganisms<br>
+<strong>6. Alkaline Mineralisation</strong> — pH is raised to 8+ with natural minerals<br>
+<strong>7. Ozonation</strong> — Final sterilisation and freshness lock<br><br>
+The result: water that is <strong>cleaner than any ground or spring source</strong> — born entirely from the sky.`,
+
+  philosophy:`<strong>🕉️ Panchabhuta Philosophy</strong><br><br>
+Akash Jal is built on the ancient Indian concept of <em>five sacred elements</em>:<br><br>
+🌌 <strong>Akasha (Space/Ether)</strong> — The infinite sky where our water originates<br>
+💨 <strong>Vayu (Air)</strong> — The atmosphere that carries moisture<br>
+🔥 <strong>Agni (Fire/Energy)</strong> — The energy driving our technology<br>
+💧 <strong>Jal (Water)</strong> — The pure output, life itself<br>
+🌍 <strong>Prithvi (Earth)</strong> — What we protect by never touching groundwater<br><br>
+<em>From Akasha to Vayu, from Vayu to Jal</em> — our entire brand story is this elemental journey.<br><br>
+The brand name itself: <strong>Akash</strong> (Sky) + <strong>Jal</strong> (Water) = Water from the Sky.`,
+
+  sustainability:`<strong>🌿 Our Eco Mission</strong><br><br>
+Akash Jal is one of the most sustainable water brands on earth:<br><br>
+✅ <strong>Zero Groundwater Extraction</strong> — We never touch underground aquifers<br>
+✅ <strong>Zero River/Lake Depletion</strong> — 100% atmosphere-sourced<br>
+✅ <strong>Recyclable Aluminium Cans</strong> — Infinitely recyclable packaging<br>
+✅ <strong>Energy-Efficient AWG Units</strong> — Optimised for low power consumption<br>
+✅ <strong>No Plastic Bottles</strong> — Our commitment to a plastic-free future<br>
+✅ <strong>Carbon Footprint Awareness</strong> — Actively working toward carbon neutrality<br><br>
+<em>"We take from the sky, not the earth."</em><br>
+India faces a severe groundwater crisis — Akash Jal is a direct solution.`,
+
+  geometry:`<strong>🔷 Sacred Geometry Identity</strong><br><br>
+Our visual language is rooted in two ancient geometric systems:<br><br>
+<strong>Kanakadhara Yantram</strong><br>
+The yantra of abundance, flow, and divine prosperity. Concentric rings, overlapping squares, and triangles — representing the cyclical flow from sky to water. <em>"A flow that gives from the sky, not takes from the earth."</em><br><br>
+<strong>Platonic Solids</strong><br>
+• <strong>Octahedron</strong> → represents Air (Vayu) — subtle structure, movement<br>
+• <strong>Icosahedron</strong> → represents Water (Jal) — flow and transformation<br>
+• Our logo evolves from these forms — geometry as brand identity<br><br>
+Every design element tells the story of <em>air becoming water</em>.`,
+
+  partner:`<strong>🤝 Partner with Akash Jal</strong><br><br>
+We welcome all forms of collaboration:<br><br>
+<strong>Distribution Partners</strong><br>
+Become an authorised distributor across India or internationally<br><br>
+<strong>Hospitality & F&B</strong><br>
+Hotels, resorts, fine dining restaurants, airlines, lounges — elevate your water offering<br><br>
+<strong>Corporate & Events</strong><br>
+Premium branded water for corporate gifting, conferences, weddings, luxury events<br><br>
+<strong>Wellness & Lifestyle</strong><br>
+Yoga studios, spas, gyms, health brands — align with our conscious philosophy<br><br>
+<strong>Investment & Funding</strong><br>
+We are open to strategic investors who share our vision<br><br>
+📧 Write to us: <strong>info@akashjal.com</strong><br>
+📍 Visit: Plot No. 134, I.D.A., Phase III, Cherlapally, Hyderabad – 500051`,
+
+  contact:`<strong>📍 Contact Akash Jal</strong><br><br>
+<strong>Prana AkashJal Pvt. Ltd.</strong><br><br>
+📌 <strong>Address:</strong><br>Plot No. 134, I.D.A., Phase III<br>Cherlapally, TSIIC-IALA<br>Hyderabad – 500051, Telangana<br><br>
+📧 <strong>Email:</strong> info@akashjal.com<br>
+🌐 <strong>Website:</strong> www.akashjal.com<br><br>
+⏰ <strong>Business Hours:</strong> Mon–Sat, 10 AM – 6 PM IST<br><br>
+For partnerships, bulk orders, or media enquiries — reach us at <strong>info@akashjal.com</strong>`,
+
+  founder:`<strong>👤 Aryan Mohanty — Founder & Creative Director</strong><br><br>
+Aryan Mohanty is the visionary behind Akash Jal — a brand that bridges ancient Indian philosophy with modern water science.<br><br>
+As founder, he oversees:<br>
+• Brand identity & sacred geometry design system<br>
+• Product development & packaging<br>
+• Marketing strategy & digital presence<br>
+• B2B partnerships & investor relations<br><br>
+<em>"Water is not just a commodity — it is the living embodiment of Jal, one of the five sacred elements. Akash Jal was created to honour that truth."</em><br>— Aryan Mohanty`,
+
+  certifications:`<strong>🏅 Quality & Standards</strong><br><br>
+Akash Jal is committed to the highest standards of water quality and safety:<br><br>
+✅ <strong>BIS Certified</strong> — Bureau of Indian Standards compliant<br>
+✅ <strong>FSSAI Approved</strong> — Food Safety and Standards Authority of India<br>
+✅ <strong>ISO 22000</strong> — Food Safety Management System<br>
+✅ <strong>WHO Guidelines</strong> — Water quality aligned with WHO standards<br>
+✅ <strong>Alkaline pH 8+</strong> — Lab-tested and verified<br>
+✅ <strong>Ultra-Low TDS</strong> — Third-party lab certified<br><br>
+Every batch is tested before dispatch. <strong>Purity is our promise.</strong>`,
+};
+
+function getReply(t){
+  t = t.toLowerCase();
+  if(t==='about'||t.includes('what is akash')||t.includes('who are you')||t.includes('company')||t.includes('brand')) return KB.about;
+  if(t==='products'||t.includes('product')||t.includes('can')||t.includes('price')||t.includes('cost')||t.includes('buy')||t.includes('order')) return KB.products;
+  if(t==='technology'||t.includes('tech')||t.includes('how does')||t.includes('filter')||t.includes('purif')||t.includes('awg')||t.includes('process')) return KB.technology;
+  if(t==='philosophy'||t.includes('philosoph')||t.includes('panchabhuta')||t.includes('element')||t.includes('akasha')||t.includes('vayu')||t.includes('spiritual')) return KB.philosophy;
+  if(t==='sustainability'||t.includes('sustain')||t.includes('eco')||t.includes('environment')||t.includes('green')||t.includes('groundwater')||t.includes('plastic')) return KB.sustainability;
+  if(t==='geometry'||t.includes('geometr')||t.includes('yantra')||t.includes('sacred')||t.includes('platonic')||t.includes('design')||t.includes('logo')) return KB.geometry;
+  if(t==='partner'||t.includes('partner')||t.includes('distribut')||t.includes('invest')||t.includes('b2b')||t.includes('franchise')||t.includes('collaborat')) return KB.partner;
+  if(t==='contact'||t.includes('contact')||t.includes('address')||t.includes('email')||t.includes('location')||t.includes('office')||t.includes('where')) return KB.contact;
+  if(t==='founder'||t.includes('aryan')||t.includes('founder')||t.includes('who made')||t.includes('creator')||t.includes('team')) return KB.founder;
+  if(t==='certifications'||t.includes('certif')||t.includes('safe')||t.includes('quality')||t.includes('fssai')||t.includes('bis')||t.includes('iso')||t.includes('standard')) return KB.certifications;
+  return `Thanks for your message! 😊 I can help with:<br><br>
+💧 Products &amp; Pricing &nbsp;|&nbsp; ⚗️ Technology<br>
+🕉️ Philosophy &nbsp;|&nbsp; 🌿 Eco Mission<br>
+🔷 Sacred Geometry &nbsp;|&nbsp; 🤝 Partnerships<br>
+📍 Contact &nbsp;|&nbsp; 👤 Founder &nbsp;|&nbsp; 🏅 Quality<br><br>
+Tap a button below or ask me anything about <strong>Akash Jal</strong>!`;
+}
+
+let chatOpen = false;
+function toggleChat(){
+  chatOpen = !chatOpen;
+  const w = document.getElementById('chatWidget');
+  const b = document.getElementById('chatBadge');
+  w.classList.toggle('open', chatOpen);
+  if(b) b.style.display = chatOpen ? 'none' : 'block';
+}
+
+function addMsg(html, type){
+  const body = document.getElementById('chatBody');
+  const now  = new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+  const div  = document.createElement('div');
+  div.className = 'chat-msg ' + type;
+  div.innerHTML = html + `<div class="chat-msg-time">${now}</div>`;
+  body.appendChild(div);
+  setTimeout(()=>{ body.scrollTop = body.scrollHeight; }, 50);
+}
+
+function showTyping(){
+  const body = document.getElementById('chatBody');
+  const t = document.createElement('div');
+  t.className='chat-typing'; t.id='typingInd';
+  t.innerHTML='<span></span><span></span><span></span>';
+  body.appendChild(t);
+  body.scrollTop = body.scrollHeight;
+}
+function hideTyping(){ const t=document.getElementById('typingInd'); if(t)t.remove(); }
+
+function sendQuick(key){
+  const labels={about:'About Akash Jal',products:'Products & Pricing',technology:'Our Technology',philosophy:'Panchabhuta Philosophy',sustainability:'Eco Mission',geometry:'Sacred Geometry',partner:'Partnership',contact:'Contact Details',founder:'About the Founder',certifications:'Quality & Certifications'};
+  addMsg(labels[key]||key,'user');
+  document.getElementById('chatQuick').style.display='none';
+  showTyping();
+  setTimeout(()=>{ hideTyping(); addMsg(getReply(key),'bot'); }, 800);
+}
+
+function sendChat(){
+  const inp = document.getElementById('chatInput');
+  const msg = inp.value.trim();
+  if(!msg) return;
+  addMsg(msg,'user');
+  inp.value='';
+  document.getElementById('chatQuick').style.display='none';
+  showTyping();
+  setTimeout(()=>{ hideTyping(); addMsg(getReply(msg),'bot'); }, 900);
+}
 </script>
 </body>
 </html>
