@@ -251,7 +251,7 @@ nav.menu{display:flex;gap:28px;align-items:center;}
   margin-bottom:30px;font-weight:600;
 }
 .eyebrow-dot{width:5px;height:5px;border-radius:50%;background:var(--sky-500);box-shadow:0 0 8px var(--sky-400);}
-.sanskrit{font-family:'Noto Serif Devanagari','Cormorant Garamond',serif;font-size:15px;font-weight:300;color:var(--sky-700);letter-spacing:.06em;line-height:1.7;margin-bottom:20px;font-style:italic;}
+.sanskrit{font-family:'Noto Serif Devanagari','Cormorant Garamond',serif;font-size:18px;font-weight:700;color:var(--sky-700);letter-spacing:.06em;line-height:1.7;margin-bottom:20px;font-style:italic;}
 .hero-title{font-family:'Cormorant Garamond',serif;font-size:100px;line-height:.88;letter-spacing:-.048em;font-weight:700;color:var(--sky-950);}
 .hero-title .accent{display:block;background:linear-gradient(125deg,var(--sky-700) 0%,var(--sky-500) 50%,var(--sky-400) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 2px 12px rgba(2,132,199,.28));}
 .hero-sub{margin-top:24px;font-size:18.5px;line-height:1.82;color:var(--ink-mid);max-width:640px;font-weight:300;}
@@ -328,6 +328,25 @@ nav.menu{display:flex;gap:28px;align-items:center;}
 .sustain-icon{width:56px;height:56px;border-radius:16px;background:rgba(2,132,199,.10);border:1.5px solid rgba(2,132,199,.22);display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:22px;}
 .sustain-title{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;margin-bottom:12px;color:var(--sky-900);}
 .sustain-text{font-size:14.5px;line-height:1.78;color:var(--ink-muted);}
+
+/* ── GEOMETRY ── */
+.geometry-split{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:1300px;margin:60px auto 0;}
+.geo-card{border-radius:28px;padding:44px;border:1.5px solid;overflow:hidden;position:relative;transition:transform .3s,box-shadow .3s;}
+.geo-card:hover{transform:translateY(-6px);box-shadow:0 24px 60px rgba(2,132,199,.15);}
+.geo-gold{border-color:rgba(2,132,199,.35);background:linear-gradient(180deg,rgba(186,230,253,.70),rgba(224,242,254,.90));}
+.geo-cyan{border-color:rgba(56,189,248,.35);background:linear-gradient(180deg,rgba(224,242,254,.80),rgba(240,249,255,.95));}
+.geo-kicker{font-size:10px;letter-spacing:.42em;text-transform:uppercase;margin-bottom:14px;font-weight:600;}
+.geo-kicker.gold{color:var(--sky-700);}
+.geo-kicker.cyan{color:var(--sky-600);}
+.geo-title{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:600;margin-bottom:16px;color:var(--sky-950);}
+.geo-text{font-size:15px;line-height:1.82;color:var(--ink-muted);max-width:400px;}
+.yantram-wrap{display:flex;justify-content:center;align-items:center;margin-top:36px;padding:32px;border-radius:22px;border:1px solid rgba(2,132,199,.15);background:rgba(255,255,255,.55);backdrop-filter:blur(10px);}
+.yantram-svg{width:240px;height:240px;}
+.platonic-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:32px;}
+.plato-panel{border-radius:20px;border:1px solid rgba(2,132,199,.15);background:rgba(255,255,255,.60);padding:22px;display:flex;flex-direction:column;align-items:center;backdrop-filter:blur(8px);}
+.plato-label{font-size:9px;letter-spacing:.36em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:16px;align-self:flex-start;}
+.plato-figure{height:100px;display:flex;align-items:center;justify-content:center;margin-bottom:14px;}
+.plato-text{font-size:12px;line-height:1.6;color:var(--ink-muted);text-align:center;}
 
 /* ── PRODUCTS (4-can grid) ── */
 .products-intro{display:grid;grid-template-columns:.85fr 1.15fr;gap:60px;align-items:center;margin-bottom:60px;}
@@ -426,8 +445,8 @@ nav.menu{display:flex;gap:28px;align-items:center;}
 .fab-stack{position:fixed;bottom:32px;right:32px;z-index:999;display:flex;flex-direction:column;gap:14px;align-items:center;}
 .fab{width:54px;height:54px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .25s,box-shadow .25s;animation:fabSlideIn .5s ease both;}
 .fab:hover{transform:translateY(-3px) scale(1.07);}
-.fab-top{background:rgba(255,255,255,.80);border:1.5px solid rgba(2,132,199,.35);color:var(--sky-700);font-size:20px;box-shadow:0 8px 28px rgba(2,132,199,.18);backdrop-filter:blur(14px);animation-delay:.1s;opacity:0;display:none;}
-.fab-top.show{display:flex;animation:fabPop .45s .05s ease both;}
+.fab-top{background:rgba(255,255,255,.80);border:1.5px solid rgba(2,132,199,.35);color:var(--sky-700);font-size:20px;box-shadow:0 8px 28px rgba(2,132,199,.18);backdrop-filter:blur(14px);opacity:0;pointer-events:none;visibility:hidden;transition:opacity .35s,transform .35s,visibility .35s;}
+.fab-top.show{opacity:1;pointer-events:auto;visibility:visible;animation:fabPop .4s ease both;}
 .fab-chat{background:linear-gradient(135deg,var(--sky-600),var(--sky-800));border:none;color:#fff;font-size:22px;box-shadow:0 10px 36px rgba(2,132,199,.40);animation-delay:.2s;}
 .fab-chat-badge{position:absolute;top:-3px;right:-3px;width:14px;height:14px;border-radius:50%;background:var(--sky-400);border:2px solid #fff;animation:glowPulse 2s ease-in-out infinite;}
 
@@ -511,9 +530,9 @@ footer::after{
   background:rgba(56,189,248,.06);
   border:1px solid rgba(56,189,248,.12);
   font-family:'Noto Serif Devanagari','Cormorant Garamond',serif;
-  font-size:12px;line-height:2.0;
-  color:rgba(125,211,252,.60);
-  font-style:italic;
+  font-size:14px;line-height:2.0;
+  color:rgba(255,255,255,.95);
+  font-style:italic;font-weight:700;
 }
 /* Social row */
 .footer-social-row{display:flex;gap:10px;margin-top:18px;}
@@ -644,7 +663,7 @@ footer::after{
 .rj-phil-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:60px;align-items:center;margin-bottom:0;}
 .rj-phil-left{border-radius:28px;border:1.5px solid rgba(2,132,199,.22);background:linear-gradient(160deg,rgba(255,255,255,.88),rgba(224,242,254,.80));padding:36px;backdrop-filter:blur(14px);box-shadow:0 8px 32px rgba(2,132,199,.10);}
 .rj-phil-left-eyebrow{font-size:9.5px;letter-spacing:.42em;text-transform:uppercase;color:var(--sky-600);margin-bottom:16px;font-weight:600;}
-.rj-phil-sanskrit{font-family:'Noto Serif Devanagari','Cormorant Garamond',serif;font-size:36px;font-weight:400;color:var(--sky-900);letter-spacing:.04em;margin-bottom:10px;}
+.rj-phil-sanskrit{font-family:'Noto Serif Devanagari','Cormorant Garamond',serif;font-size:44px;font-weight:700;color:var(--sky-900);letter-spacing:.04em;margin-bottom:10px;}
 .rj-phil-translation{font-size:15px;color:var(--sky-700);font-style:italic;margin-bottom:22px;}
 .rj-phil-rule{height:2px;background:linear-gradient(90deg,var(--sky-300),var(--sky-100),transparent);margin-bottom:22px;}
 .rj-phil-body{font-size:14px;line-height:1.82;color:var(--ink-muted);}
@@ -819,13 +838,43 @@ footer::after{
   .fab-stack{bottom:16px;right:14px;gap:10px;}
   .fab{width:46px;height:46px;font-size:18px;}
 }
-@media(max-width:400px){
-  .hero-title{font-size:36px!important;}
-  .sec-title{font-size:30px!important;}
-  .hero-left{padding:18px 16px;}
-  .hero-can-img{width:200px!important;}
-  .story-quote{font-size:28px!important;}
-  .chat-widget{width:calc(100vw - 16px);right:8px;left:8px;}
+/* ── STORY IMAGE SPLIT ── */
+.story-split-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:40px;align-items:start;}
+.story-img-wrap{border-radius:26px;overflow:hidden;border:1.5px solid rgba(2,132,199,.18);box-shadow:0 12px 40px rgba(2,132,199,.12);position:relative;min-height:400px;background:rgba(224,242,254,.60);}
+.story-img{width:100%;height:100%;object-fit:cover;display:block;min-height:400px;}
+.story-img-placeholder{display:none;min-height:400px;flex-direction:column;align-items:center;justify-content:center;padding:32px;text-align:center;}
+
+/* ── PROCESS SPLIT ── */
+.process-split-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:40px;align-items:start;}
+.rj-process-img-wrap{border-radius:26px;overflow:hidden;border:1.5px solid rgba(56,189,248,.25);box-shadow:0 16px 48px rgba(0,0,0,.22);min-height:420px;background:rgba(255,255,255,.05);}
+.process-img{width:100%;height:100%;object-fit:cover;display:block;min-height:420px;}
+.process-img-placeholder{display:none;min-height:420px;flex-direction:column;align-items:center;justify-content:center;padding:32px;text-align:center;}
+
+/* ── PROCESS STEPS ROW — fixed flexbox ── */
+.process-steps-row{display:flex;align-items:center;gap:6px;border-radius:18px;border:1.5px solid rgba(56,189,248,.22);background:rgba(255,255,255,.08);padding:12px 14px;flex-wrap:nowrap;overflow:hidden;}
+.process-steps-row .rj-journey-step{flex:1;min-width:0;padding:10px 6px;border:1px solid rgba(56,189,248,.28);border-radius:14px;}
+.process-steps-row .rj-journey-num{font-size:9px;margin-bottom:4px;letter-spacing:.20em;color:var(--sky-200);}
+.process-steps-row .rj-journey-name{font-size:10px;letter-spacing:.12em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.process-steps-row .rj-journey-arrow{flex-shrink:0;width:14px;text-align:center;color:rgba(255,255,255,.35);font-size:14px;line-height:1;}
+
+@media(max-width:1080px){
+  .story-split-grid{grid-template-columns:1fr!important;}
+  .process-split-grid{grid-template-columns:1fr!important;}
+  .story-img,.process-img{min-height:280px!important;}
+  .story-img-wrap,.rj-process-img-wrap{min-height:280px!important;}
+}
+@media(max-width:768px){
+  .story-img,.process-img{min-height:220px!important;}
+  .story-img-wrap,.rj-process-img-wrap{min-height:220px!important;}
+  .process-steps-row .rj-journey-arrow{display:none!important;}
+  .process-steps-row{gap:4px!important;}
+  .process-steps-row .rj-journey-step{padding:8px 4px!important;}
+  .process-steps-row .rj-journey-name{font-size:9px!important;}
+}
+@media(max-width:480px){
+  .process-steps-row .rj-journey-step{padding:7px 3px!important;}
+  .process-steps-row .rj-journey-name{font-size:8px!important;letter-spacing:.06em!important;}
+  .process-steps-row .rj-journey-num{font-size:8px!important;}
 }
 </style>
 
@@ -860,11 +909,11 @@ footer::after{
     </div>
   </div>
   <nav class="menu">
-    <span class="menu-item" onclick="goTo('story')">Story</span>
-    <span class="menu-item" onclick="goTo('process')">Process</span>
-    <span class="menu-item" onclick="goTo('philosophy')">Philosophy</span>
+    <span class="menu-item" onclick="goTo('story')">Philosophy</span>
+    <span class="menu-item" onclick="goTo('process')">Physics</span>
+    <span class="menu-item" onclick="goTo('philosophy')">Geometry</span>
     <span class="menu-item" onclick="goTo('products')">Products</span>
-    <span class="menu-item" onclick="goTo('founders')">Founders</span>
+    <span class="menu-item" onclick="goTo('founders')">People</span>
   </nav>
   <button class="nav-cta" onclick="goTo('contact')">Partner With Us</button>
   <button class="hamburger" id="hamburger" aria-label="Menu">
@@ -875,11 +924,11 @@ footer::after{
 <!-- Mobile Menu -->
 <div class="mobile-menu" id="mobileMenu">
   <button class="hamburger open" style="position:absolute;top:20px;right:22px" onclick="closeMobile()"><span></span><span></span><span></span></button>
-  <span class="mob-item" onclick="closeMobile('story')">Story</span>
-  <span class="mob-item" onclick="closeMobile('process')">Process</span>
-  <span class="mob-item" onclick="closeMobile('philosophy')">Philosophy</span>
+  <span class="mob-item" onclick="closeMobile('story')">Philosophy</span>
+  <span class="mob-item" onclick="closeMobile('process')">Physics</span>
+  <span class="mob-item" onclick="closeMobile('philosophy')">Geometry</span>
   <span class="mob-item" onclick="closeMobile('products')">Products</span>
-  <span class="mob-item" onclick="closeMobile('founders')">Founders</span>
+  <span class="mob-item" onclick="closeMobile('founders')">People</span>
   <button class="mob-cta" onclick="closeMobile('contact')">Partner With Us</button>
 </div>
 
@@ -954,94 +1003,105 @@ footer::after{
 </div>
 
 <!-- ── STORY ── -->
-<section class="section z1" id="story">
-  <div class="rj-story-grid">
-    <div>
-      <div class="kicker">Brand Story</div>
-      <h2 class="sec-title" style="font-size:52px;text-align:left;line-height:1.05;">A brand world that feels less like packaged water and more like a new cultural category.</h2>
+<section class="section z1" id="story" style="padding-top:90px;padding-bottom:90px;">
+  <div style="max-width:1280px;margin:0 auto;">
+    <!-- Header row -->
+    <div style="margin-bottom:48px;">
+      <div class="kicker">Philosophy</div>
+      <h2 class="sec-title" style="font-size:52px;text-align:left;line-height:1.05;max-width:700px;">Born from the sky, crafted for conscious living.</h2>
     </div>
-    <div class="rj-story-cards">
-      <div class="rj-story-card reveal">
-        <div class="rj-story-eyebrow">Created from Air</div>
-        <h3 class="rj-story-card-title">A premium atmospheric water brand with a category-defining origin.</h3>
-        <p class="rj-story-card-text">Akash Jal is not built on traditional extraction. It is built on the transformative idea that water can be created from atmosphere and presented as a conscious, elevated experience.</p>
+    <!-- Image + Cards split -->
+    <div class="story-split-grid">
+      <!-- Image -->
+      <div class="story-img-wrap reveal">
+        <img src="story-image.png" alt="Akash Jal — Philosophy" class="story-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"/>
+        <div class="story-img-placeholder">
+          <div style="font-size:48px;">🌌</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--sky-800);font-weight:600;margin-top:12px;">story-image.png</div>
+          <div style="font-size:12px;color:var(--ink-faint);margin-top:6px;">Replace with your story image</div>
+        </div>
       </div>
-      <div class="rj-story-card reveal">
-        <div class="rj-story-eyebrow">Modern Indian Luxury</div>
-        <h3 class="rj-story-card-title">Indian in soul. Minimal in expression. Global in ambition.</h3>
-        <p class="rj-story-card-text">The brand combines technological purity with elemental philosophy, creating a world that feels calm, precise, and unmistakably premium.</p>
-      </div>
-      <div class="rj-story-card reveal">
-        <div class="rj-story-eyebrow">Future Relevance</div>
-        <h3 class="rj-story-card-title">A water narrative built for sustainability-conscious consumers.</h3>
-        <p class="rj-story-card-text">Akash Jal positions hydration as a future-facing category—where innovation, responsible sourcing, and refined storytelling meet.</p>
+      <!-- Cards -->
+      <div class="rj-story-cards">
+        <div class="rj-story-card reveal">
+          <div class="rj-story-eyebrow">Created from Air</div>
+          <h3 class="rj-story-card-title">A premium atmospheric water brand with a category-defining origin.</h3>
+          <p class="rj-story-card-text">Akash Jal is not built on traditional extraction. It is built on the transformative idea that water can be created from atmosphere and presented as a conscious, elevated experience.</p>
+        </div>
+        <div class="rj-story-card reveal">
+          <div class="rj-story-eyebrow">Modern Indian Luxury</div>
+          <h3 class="rj-story-card-title">Indian in soul. Minimal in expression. Global in ambition.</h3>
+          <p class="rj-story-card-text">The brand combines technological purity with elemental philosophy, creating a world that feels calm, precise, and unmistakably premium.</p>
+        </div>
+        <div class="rj-story-card reveal">
+          <div class="rj-story-eyebrow">Future Relevance</div>
+          <h3 class="rj-story-card-title">A water narrative built for sustainability-conscious consumers.</h3>
+          <p class="rj-story-card-text">Akash Jal positions hydration as a future-facing category—where innovation, responsible sourcing, and refined storytelling meet.</p>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ── PROCESS ── -->
-<section class="section-dark z1" id="process">
-  <div class="rj-process-inner">
-    <div>
-      <div class="kicker">The Process</div>
-      <h2 class="sec-title" style="font-size:52px;text-align:left;line-height:1.05;">The making of water, translated into a premium visual journey.</h2>
-      <p class="sec-para" style="margin-top:20px;">Akash Jal takes a complex process and turns it into something elegantly understandable: sky, capture, purification, mineral balance, and experience.</p>
+<section class="section-dark z1" id="process" style="padding-top:90px;padding-bottom:90px;">
+  <div style="max-width:1280px;margin:0 auto;">
+    <!-- Header -->
+    <div style="margin-bottom:40px;">
+      <div class="kicker">Physics</div>
+      <h2 class="sec-title" style="font-size:48px;text-align:left;line-height:1.05;">The making of water, translated into a premium visual journey.</h2>
+      <p class="sec-para" style="margin-top:14px;">Sky, capture, purification, mineral balance, and experience — a sky-to-sip journey.</p>
     </div>
-    <div class="rj-process-cards-wrap">
-      <!-- Journey steps -->
-      <div class="rj-process-main reveal">
-        <div class="rj-journey-steps">
-          <div class="rj-journey-step">
-            <div class="rj-journey-num">01</div>
-            <div class="rj-journey-name">Sky</div>
-          </div>
-          <div class="rj-journey-arrow">—</div>
-          <div class="rj-journey-step">
-            <div class="rj-journey-num">02</div>
-            <div class="rj-journey-name">Capture</div>
-          </div>
-          <div class="rj-journey-arrow">—</div>
-          <div class="rj-journey-step">
-            <div class="rj-journey-num">03</div>
-            <div class="rj-journey-name">Purify</div>
-          </div>
-          <div class="rj-journey-arrow">—</div>
-          <div class="rj-journey-step">
-            <div class="rj-journey-num">04</div>
-            <div class="rj-journey-name">Balance</div>
-          </div>
-          <div class="rj-journey-arrow">—</div>
-          <div class="rj-journey-step">
-            <div class="rj-journey-num">05</div>
-            <div class="rj-journey-name">Sip</div>
-          </div>
+    <!-- Image + right content -->
+    <div class="process-split-grid">
+      <!-- Left image -->
+      <div class="rj-process-img-wrap reveal">
+        <img src="process-infographic.png" alt="Akash Jal — Air to Water Process" class="process-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"/>
+        <div class="process-img-placeholder">
+          <div style="font-size:48px;">⚗️</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:18px;color:#fff;font-weight:600;margin-top:12px;">process-infographic.png</div>
+          <div style="font-size:12px;color:rgba(186,230,253,.60);margin-top:6px;">Replace with your process image</div>
         </div>
-        <div class="rj-pillars">
+      </div>
+      <!-- Right: steps + pillars + statement -->
+      <div style="display:flex;flex-direction:column;gap:18px;">
+        <!-- Journey chips — all 5 in one row via grid -->
+        <div class="process-steps-row reveal">
+          <div class="rj-journey-step"><div class="rj-journey-num">01</div><div class="rj-journey-name">Sky</div></div>
+          <div class="rj-journey-arrow">›</div>
+          <div class="rj-journey-step"><div class="rj-journey-num">02</div><div class="rj-journey-name">Capture</div></div>
+          <div class="rj-journey-arrow">›</div>
+          <div class="rj-journey-step"><div class="rj-journey-num">03</div><div class="rj-journey-name">Purify</div></div>
+          <div class="rj-journey-arrow">›</div>
+          <div class="rj-journey-step"><div class="rj-journey-num">04</div><div class="rj-journey-name">Balance</div></div>
+          <div class="rj-journey-arrow">›</div>
+          <div class="rj-journey-step"><div class="rj-journey-num">05</div><div class="rj-journey-name">Sip</div></div>
+        </div>
+        <!-- Pillars -->
+        <div class="rj-pillars reveal">
           <div class="rj-pillar">
             <div class="rj-pillar-title">Atmospheric Origin</div>
-            <p class="rj-pillar-text">Water generated from air through advanced atmospheric systems, expressing a new paradigm for premium hydration.</p>
+            <p class="rj-pillar-text">Water generated from air through advanced atmospheric systems — a new paradigm for premium hydration.</p>
           </div>
           <div class="rj-pillar">
             <div class="rj-pillar-title">Conscious Luxury</div>
-            <p class="rj-pillar-text">A visual and material experience shaped by minimalism, calm, and emotional depth rather than noise.</p>
+            <p class="rj-pillar-text">A visual and material experience shaped by minimalism, calm, and emotional depth.</p>
           </div>
           <div class="rj-pillar">
             <div class="rj-pillar-title">Water Responsibility</div>
-            <p class="rj-pillar-text">A future-facing brand philosophy that supports reduced extraction and more thoughtful water narratives.</p>
+            <p class="rj-pillar-text">A future-facing brand philosophy supporting reduced extraction and thoughtful water narratives.</p>
           </div>
         </div>
-      </div>
-      <!-- Statement card -->
-      <div class="rj-statement-card reveal">
-        <div class="rj-stmt-eyebrow">Signature Statement</div>
-        <h3 class="rj-stmt-title">We do not position water as a commodity. We elevate it into experience.</h3>
-        <p class="rj-stmt-text">This is where Akash Jal becomes distinct. It is not merely about hydration, but about a different way to think about source, responsibility, and design.</p>
-        <div class="rj-category-block">
-          <div class="rj-cat-eyebrow">Category Position</div>
-          <div class="rj-cat-row"><span class="rj-cat-key">Source</span><span class="rj-cat-val">Atmospheric water creation</span></div>
-          <div class="rj-cat-row"><span class="rj-cat-key">Feeling</span><span class="rj-cat-val">Calm, trust, elevated modernity</span></div>
-          <div class="rj-cat-row"><span class="rj-cat-key">Expression</span><span class="rj-cat-val">Minimal, elemental, premium</span></div>
+        <!-- Statement -->
+        <div class="rj-statement-card reveal" style="padding:22px 24px;">
+          <div class="rj-stmt-eyebrow">Signature Statement</div>
+          <h3 class="rj-stmt-title" style="font-size:19px;margin-bottom:12px;">We do not position water as a commodity. We elevate it into experience.</h3>
+          <div class="rj-category-block">
+            <div class="rj-cat-eyebrow">Category Position</div>
+            <div class="rj-cat-row"><span class="rj-cat-key">Source</span><span class="rj-cat-val">Atmospheric water creation</span></div>
+            <div class="rj-cat-row"><span class="rj-cat-key">Feeling</span><span class="rj-cat-val">Calm, trust, elevated modernity</span></div>
+            <div class="rj-cat-row"><span class="rj-cat-key">Expression</span><span class="rj-cat-val">Minimal, elemental, premium</span></div>
+          </div>
         </div>
       </div>
     </div>
@@ -1059,9 +1119,8 @@ footer::after{
       <p class="rj-phil-body">Akash Jal expresses Indian depth through restraint rather than excess, allowing philosophy to enrich the experience without overpowering the brand's modern global language.</p>
     </div>
     <div>
-      <div class="kicker">Philosophy</div>
+      <div class="kicker">Geometry</div>
       <h2 class="sec-title" style="font-size:50px;text-align:left;line-height:1.05;">Scientific confidence, spiritual quiet, and premium contemporary design.</h2>
-      <p class="sec-para" style="margin-top:20px;">The website language of Akash Jal should feel immersive and meditative—where every transition, gradient, and line of copy reinforces calm distinction.</p>
       <div class="rj-phil-points">
         <div class="rj-phil-point reveal">Calm gradients inspired by sky, vapor, and ripple movement</div>
         <div class="rj-phil-point reveal">Premium whitespace and restrained typography</div>
@@ -1092,6 +1151,77 @@ footer::after{
       <div class="phil-subtitle">Water / Life</div>
       <h3 class="phil-name">Jal</h3>
       <p class="phil-desc">The visible form of purity. Water born from the sky, refined for a conscious future.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── SACRED GEOMETRY (merged with Philosophy) ── -->
+<section class="section z1" id="geometry" style="padding-top:80px;padding-bottom:100px;">
+  <div class="center-intro">
+    <div class="kicker">Sacred Geometry</div>
+    <h2 class="sec-title">Visual Language of the Brand</h2>
+    <div class="gold-rule"></div>
+    <p class="sec-para">Ancient geometry encodes the story of Akash Jal — from the yantra of abundance to the Platonic forms of transformation.</p>
+  </div>
+  <div class="geometry-split">
+    <!-- Kanakadhara Yantram -->
+    <div class="geo-card geo-gold reveal">
+      <div class="geo-kicker gold">Kanakadhara Yantram</div>
+      <h3 class="geo-title">Abundance through Flow.</h3>
+      <p class="geo-text">The Kanakadhara Yantram represents flow, prosperity, and divine abundance. For Akash Jal, it symbolizes a system that gives without taking from the earth — a flow that comes from the sky.<br><br><em style="color:var(--sky-700);font-style:italic;">A flow that does not take from the earth, but gives from the sky.</em></p>
+      <div class="yantram-wrap">
+        <svg class="yantram-svg" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+          <g transform="translate(120,120)">
+            <g style="animation:rotateYantram 40s linear infinite;transform-origin:0 0">
+              <circle r="108" fill="none" stroke="rgba(2,132,199,.22)" stroke-width="1"/>
+              <circle r="88" fill="none" stroke="rgba(2,132,199,.28)" stroke-width="1"/>
+              <circle r="68" fill="none" stroke="rgba(2,132,199,.34)" stroke-width="1"/>
+              <circle r="48" fill="none" stroke="rgba(2,132,199,.40)" stroke-width="1"/>
+            </g>
+            <g style="animation:rotateYantramRev 60s linear infinite;transform-origin:0 0">
+              <rect x="-70" y="-70" width="140" height="140" fill="none" stroke="rgba(14,165,233,.30)" stroke-width="1"/>
+              <rect x="-70" y="-70" width="140" height="140" fill="none" stroke="rgba(14,165,233,.20)" stroke-width="1" transform="rotate(22.5)"/>
+              <rect x="-70" y="-70" width="140" height="140" fill="none" stroke="rgba(14,165,233,.14)" stroke-width="1" transform="rotate(45)"/>
+            </g>
+            <polygon points="0,-90 77.9,45 -77.9,45" fill="none" stroke="rgba(2,132,199,.25)" stroke-width="1"/>
+            <polygon points="0,90 -77.9,-45 77.9,-45" fill="none" stroke="rgba(2,132,199,.25)" stroke-width="1"/>
+            <circle r="5" fill="rgba(2,132,199,.90)" filter="url(#skyGlow)"/>
+            <defs><filter id="skyGlow"><feGaussianBlur stdDeviation="3" result="blur"/><feComposite in="SourceGraphic" in2="blur" operator="over"/></filter></defs>
+          </g>
+        </svg>
+      </div>
+    </div>
+    <!-- Platonic Solids -->
+    <div class="geo-card geo-cyan reveal">
+      <div class="geo-kicker cyan">Platonic Solids</div>
+      <h3 class="geo-title">Geometry of Transformation.</h3>
+      <p class="geo-text">Sacred form meets modern identity. Air becomes movement, movement becomes water — expressed through precise geometry and luminous minimalism. Octahedron → Icosahedron → Your Logo.</p>
+      <div class="platonic-grid">
+        <div class="plato-panel">
+          <div class="plato-label">Octahedron — Air</div>
+          <div class="plato-figure">
+            <svg width="80" height="90" viewBox="0 0 80 90">
+              <g transform="translate(40,45)">
+                <polygon points="0,-38 33,0 0,38 -33,0" fill="none" stroke="rgba(14,165,233,.70)" stroke-width="1.5"/>
+                <line x1="0" y1="-38" x2="0" y2="-58" stroke="rgba(14,165,233,.38)" stroke-width="1"/>
+                <line x1="0" y1="38" x2="0" y2="58" stroke="rgba(14,165,233,.38)" stroke-width="1"/>
+                <circle cx="0" cy="0" r="3" fill="rgba(14,165,233,.65)"/>
+              </g>
+            </svg>
+          </div>
+          <p class="plato-text">Subtle structure, movement, and transition — the element of Air.</p>
+        </div>
+        <div class="plato-panel">
+          <div class="plato-label">Water Form — Jal</div>
+          <div class="plato-figure">
+            <svg width="60" height="90" viewBox="0 0 60 90">
+              <path d="M30 8 C30 8, 55 40, 55 58 C55 72, 43.8 82, 30 82 C16.2 82, 5 72, 5 58 C5 40, 30 8, 30 8Z" fill="none" stroke="rgba(2,132,199,.80)" stroke-width="1.5"/>
+              <ellipse cx="30" cy="58" rx="16" ry="8" fill="none" stroke="rgba(2,132,199,.35)" stroke-width="1"/>
+            </svg>
+          </div>
+          <p class="plato-text">Purity, flow, and the visible outcome of air transformed into life.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -1302,11 +1432,37 @@ footer::after{
   </div>
 </section>
 
+<!-- ── SUSTAINABILITY ── -->
+<section class="section z1" id="sustainability">
+  <div class="center-intro">
+    <div class="kicker">Sustainability</div>
+    <h2 class="sec-title">Created Without Taking<br>from the Earth</h2>
+    <div class="gold-rule"></div>
+    <p class="sec-para">Akash Jal redefines water by removing dependency on groundwater. No extraction. No depletion. Only transformation. Inspired by abundance systems like Kanakadhara Yantram, we create a loop of giving — not taking.</p>
+  </div>
+  <div class="sustain-cards">
+    <div class="sustain-card reveal">
+      <div class="sustain-icon">🌬️</div>
+      <div class="sustain-title">No Groundwater Extraction</div>
+      <p class="sustain-text">Every drop of Akash Jal comes from the atmosphere — not rivers, not aquifers. A water system that leaves the earth untouched.</p>
+    </div>
+    <div class="sustain-card reveal">
+      <div class="sustain-icon">💧</div>
+      <div class="sustain-title">Air-Sourced Water</div>
+      <p class="sustain-text">Inspired by atmospheric water creation, Akash Jal imagines hydration through transformation rather than extraction — a sky-to-bottle journey.</p>
+    </div>
+    <div class="sustain-card reveal">
+      <div class="sustain-icon">♻️</div>
+      <div class="sustain-title">Responsible Packaging</div>
+      <p class="sustain-text">From aluminium cans to global biodegradable formats, each unit carries the same philosophy: premium, minimal, and conscious.</p>
+    </div>
+  </div>
+</section>
+
 <!-- ── CLOSING VISION ── -->
 <section class="brand-story z1">
   <div class="story-bg"></div>
   <div class="closing-block reveal">
-    <div class="kicker">Closing Vision</div>
     <h3 class="closing-title">Akash Jal is building a new premium water language — one that is calm, conscious, and globally resonant.</h3>
     <p class="closing-sub">With atmospheric origin, elemental depth, and strong premium-market potential, the brand has the foundation to stand apart in a crowded hydration landscape.</p>
     <div class="story-btns" style="margin-top:36px;">
@@ -1394,9 +1550,9 @@ footer::after{
     <div>
       <div class="footer-col-title">Navigate</div>
       <div class="footer-links">
-        <span class="footer-link" onclick="goTo('story')">Brand Story</span>
-        <span class="footer-link" onclick="goTo('process')">Our Process</span>
-        <span class="footer-link" onclick="goTo('philosophy')">Philosophy</span>
+        <span class="footer-link" onclick="goTo('story')">Philosophy</span>
+        <span class="footer-link" onclick="goTo('process')">Physics</span>
+        <span class="footer-link" onclick="goTo('philosophy')">Geometry</span>
         <span class="footer-link" onclick="goTo('products')">Collection</span>
         <span class="footer-link" onclick="goTo('founders')">Founders</span>
       </div>
@@ -1445,7 +1601,7 @@ footer::after{
   <div class="footer-rule"></div>
   <div class="footer-bottom">
     <div class="footer-copy">© 2026 Prana AkashJal Pvt. Ltd. — All Rights Reserved.</div>
-    <div class="footer-crafted"><em>Crafted with care by</em> <span class="footer-crafted-name">Aryan Mohanty</span></div>
+    <div class="footer-crafted"><em>Crafted with care by</em> <a href="https://linkedin.com/in/aryanmohantyofficial?originalSubdomain=in" target="_blank" rel="noopener" class="footer-crafted-name" style="text-decoration:none;">Aryan Mohanty</a></div>
     <div class="footer-legal">
       <span class="footer-legal-link">Privacy Policy</span>
       <span class="footer-legal-link">Terms of Use</span>
@@ -1497,7 +1653,7 @@ footer::after{
   </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
 // ── EmailJS ──────────────────────────────────────────
 const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';
@@ -1611,10 +1767,12 @@ window.addEventListener('scroll',()=>{
 
 // ── Back to Top ──────────────────────────────────────
 const fabTop = document.getElementById('fabTop');
-window.addEventListener('scroll',()=>{
-  if(window.scrollY > 400){ fabTop.classList.add('show'); }
+function handleFabTop(){
+  if(window.scrollY > 300){ fabTop.classList.add('show'); }
   else { fabTop.classList.remove('show'); }
-},{passive:true});
+}
+window.addEventListener('scroll', handleFabTop, {passive:true});
+handleFabTop();
 
 // ── Aryan Chat — Rich Knowledge Base ─────────────────
 const KB = {
@@ -1752,23 +1910,69 @@ function toggleChat(){
 function addMsg(html, type){
   const body = document.getElementById('chatBody');
   const now  = new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
-  const div  = document.createElement('div');
-  div.className = 'chat-msg ' + type;
-  div.innerHTML = html + `<div class="chat-msg-time">${now}</div>`;
-  body.appendChild(div);
-  setTimeout(()=>{ body.scrollTop = body.scrollHeight; }, 50);
+  const wrap = document.createElement('div');
+  wrap.style.display = 'flex';
+  wrap.style.flexDirection = 'column';
+  wrap.style.alignItems = type === 'user' ? 'flex-end' : 'flex-start';
+  const msg = document.createElement('div');
+  msg.className = 'chat-msg ' + type;
+  msg.innerHTML = html;
+  const time = document.createElement('div');
+  time.className = 'chat-msg-time';
+  time.textContent = now;
+  wrap.appendChild(msg);
+  wrap.appendChild(time);
+  body.appendChild(wrap);
+  body.scrollTop = body.scrollHeight;
 }
 
 function showTyping(){
   const body = document.getElementById('chatBody');
   const t = document.createElement('div');
-  t.className='chat-typing'; t.id='typingInd';
-  t.innerHTML='<span></span><span></span><span></span>';
+  t.className = 'chat-typing';
+  t.id = 'chatTyping';
+  t.innerHTML = '<span></span><span></span><span></span>';
   body.appendChild(t);
   body.scrollTop = body.scrollHeight;
 }
-function hideTyping(){ const t=document.getElementById('typingInd'); if(t)t.remove(); }
+
+function hideTyping(){
+  const t = document.getElementById('chatTyping');
+  if(t) t.remove();
+}
+
+function sendChat(){
+  const input = document.getElementById('chatInput');
+  const text = input.value.trim();
+  if(!text) return;
+  input.value = '';
+  addMsg(text, 'user');
+  // hide quick buttons after first user message
+  const quick = document.getElementById('chatQuick');
+  if(quick) quick.style.display = 'none';
+  showTyping();
+  setTimeout(()=>{
+    hideTyping();
+    addMsg(getReply(text), 'bot');
+  }, 900 + Math.random()*600);
+}
 
 function sendQuick(key){
-  const labels={about:'About Akash Jal',products:'Products & Pricing',technology:'Our Technology',philosophy:'Panchabhuta Philosophy',sustainability:'Eco Mission',geometry:'Sacred Geometry',partner:'Partnership',contact:'Contact Details',founder:'About the Founder',certifications:'Quality & Certifications'};
-  addMsg(labels[key]||k
+  const labels = {
+    about:'🏢 About Us', products:'💧 Products', technology:'⚗️ Technology',
+    philosophy:'🕉️ Philosophy', sustainability:'🌿 Eco Mission', geometry:'🔷 Sacred Geometry',
+    partner:'🤝 Partnership', contact:'📍 Contact', founder:'👤 Founder', certifications:'🏅 Certifications'
+  };
+  addMsg(labels[key] || key, 'user');
+  const quick = document.getElementById('chatQuick');
+  if(quick) quick.style.display = 'none';
+  showTyping();
+  setTimeout(()=>{
+    hideTyping();
+    addMsg(getReply(key), 'bot');
+  }, 900 + Math.random()*600);
+}
+
+</script>
+</body>
+</html>
